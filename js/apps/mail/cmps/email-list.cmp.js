@@ -1,3 +1,4 @@
+import emailPreview from "./email-preview.cmp.js"
 export default {
     name: 'email-list',
     props: ['emails'],
@@ -5,7 +6,7 @@ export default {
         <!-- {{emails}} -->
         <ul class="email-list">
             <li v-for="email in emails" :key="email.id">
-                {{email.subject}}
+                <email-preview :email="email"/>
             </li>
         </ul>
         
@@ -18,6 +19,9 @@ export default {
     created() {
         // emailService.query()
         //     .then(emails => console.log(emails));
+    },
+    components: {
+        emailPreview
     }
 
 }
