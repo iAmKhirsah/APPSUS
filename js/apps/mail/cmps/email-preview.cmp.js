@@ -1,3 +1,4 @@
+import { emailService } from "../services/email-service.js";
 import longText from "./long-text.cmp.js"
 export default {
     name: 'email-preview',
@@ -17,6 +18,7 @@ export default {
     methods: {
         markRead() {
             this.email.isRead = !this.email.isRead;
+            emailService.save(this.email);
         }
     },
     computed: {

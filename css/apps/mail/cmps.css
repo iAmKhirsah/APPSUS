@@ -1,0 +1,50 @@
+/* preview */
+
+.email-preview {
+    background-color: lightcyan;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(211, 211, 211);
+    margin-inline-end: 10px;
+    margin-inline-start: 10px;
+    cursor: pointer;
+}
+
+.email-preview:hover {
+    z-index: 999;
+    border: 1px solid black;
+}
+
+
+/* email-list */
+
+.email-list {
+    list-style: none;
+}
+
+
+/* folder-filter */
+
+.folder-list {
+    height: 100vh;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    background-color: lightgreen;
+}
+
+.folder-list:first-child {
+    margin-block-start: 5px
+}
+
+.folder-list button {
+    border: none;
+    margin-block-end: 5px;
+    text-align: left;
+    background-color: lightgreen;
+}
+
+.folder-list button:hover {
+    background-color: rgb(92, 238, 92);
+}
