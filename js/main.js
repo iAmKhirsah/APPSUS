@@ -8,8 +8,6 @@ const options = {
   el: '#app',
   router,
   components: {
-    keepApp,
-    mailApp,
     homePage,
     appHeader,
   },
@@ -17,9 +15,7 @@ const options = {
   <section>
     <app-header />
     <home-page />
-    <!-- <keep-app /> -->
     <router-view />
-    <!-- <mail-app /> -->
   </section>
   `,
 };
