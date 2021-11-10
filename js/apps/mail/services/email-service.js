@@ -48,7 +48,7 @@ function _createEmails() {
             createEmail(),
             createEmail(),
         ]
-        utilService.saveToStorage(EMAILS_KEY, emails);
+        storageService.saveToStorage(EMAILS_KEY, emails);
     }
 }
 
