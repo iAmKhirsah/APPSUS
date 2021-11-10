@@ -1,0 +1,14 @@
+.main-header {
+  background-color: lightblue;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+.main-header nav {
+  display: flex;
+  align-items: center;
+}
+.main-header a {
+  padding: 5px;
+}
