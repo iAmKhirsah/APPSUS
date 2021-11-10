@@ -1,4 +1,4 @@
-import { utilService } from '../../../../services/util.service.js';
+import { storageService } from '../../../../services/storage.service.js';
 
 const NOTES_KEY = 'notes';
 const notes = [
@@ -46,9 +46,9 @@ function query() {
 
 _createNotes();
 function _createNotes() {
-  let notes = utilService.loadFromStorage(NOTES_KEY);
+  let notes = storageService.loadFromStorage(NOTES_KEY);
   if (!notes || !notes.length) {
-    utilService.saveToStorage(NOTES_KEY, gNotes);
+    storageService.saveToStorage(NOTES_KEY, gNotes);
   }
   return notes;
 }

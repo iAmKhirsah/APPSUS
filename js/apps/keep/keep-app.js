@@ -7,7 +7,7 @@ export default {
   },
   template: `
     <section class="keep-app">
-      <keep-preview :notes="notes"/>
+      <keep-preview :notes="notes" />
     </section>
     `,
   data() {
