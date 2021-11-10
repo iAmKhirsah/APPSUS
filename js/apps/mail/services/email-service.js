@@ -6,7 +6,8 @@ export const emailService = {
     query,
     save,
     getById,
-    remove
+    remove,
+    filterByCriteria
 }
 const EMAILS_KEY = 'emails';
 const loggedinUser = {
@@ -40,30 +41,39 @@ function remove(emailId) {
     asyncStorageService.remove(EMAILS_KEY, emailId);
 }
 
-function _createEmails() {
-    let emails = storageService.loadFromStorage(EMAILS_KEY);
-    if (!emails || !emails.length) {
-        emails = [
-            createEmail(),
-            createEmail(),
-            createEmail(),
-            createEmail(),
-            createEmail(),
-            createEmail(),
-            createEmail(),
-            createEmail(),
-        ]
-        storageService.saveToStorage(EMAILS_KEY, emails);
-    }
+function filterByCriteria(emails, criteria) {
+    return emails.filter(emails => emails.criteria === criteria);
 }
 
-function createEmail(subject = 'Incoming mail', body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam.', isRead = false, from = 'Anonymouse@mail.com') {
+function createEmail(criteria = 'inbox',
+    subject = 'Incoming mail',
+    body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam.',
+    isRead = false,
+    from = 'Anonymouse@mail.com', ) {
     return {
         id: utilService.makeId(),
         subject,
         body,
         isRead,
         sentAt: Date.now(),
-        from
+        from,
+        criteria
+    }
+}
+
+function _createEmails() {
+    let emails = storageService.loadFromStorage(EMAILS_KEY);
+    if (!emails || !emails.length) {
+        emails = [
+            createEmail('draft'),
+            createEmail(),
+            createEmail(),
+            createEmail(),
+            createEmail('draft'),
+            createEmail(),
+            createEmail(),
+            createEmail(),
+        ]
+        storageService.saveToStorage(EMAILS_KEY, emails);
     }
 }
