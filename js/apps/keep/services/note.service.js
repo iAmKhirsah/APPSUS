@@ -1,5 +1,7 @@
 import { storageService } from '../../../../services/storage.service.js';
-
+// export const noteService = {
+//   createNewNote,
+// };
 const NOTES_KEY = 'notes';
 const notes = [
   {
@@ -32,6 +34,14 @@ const notes = [
       ],
     },
   },
+  {
+    id: 'n104',
+    type: 'note-vid',
+    info: {
+      url: 'https://www.youtube.com/embed/tgbNymZ7vqY',
+      title: 'my first video',
+    },
+  },
 ];
 var gNotes = notes;
 
@@ -51,4 +61,8 @@ function _createNotes() {
     storageService.saveToStorage(NOTES_KEY, gNotes);
   }
   return notes;
+}
+
+function createNewNote(id, type, info) {
+  console.log(id, type, info);
 }

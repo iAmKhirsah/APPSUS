@@ -1,9 +1,6 @@
 @import '/css/cmps/app-header.css';
-<<<<<<< HEAD
 @import '/css/apps/keep/keep-app.css';
-=======
 @import './apps/mail/mail-app.css';
->>>>>>> 9172cffc3d562a9dcd168cf3b3f84699654cb857
 * {
   margin: 0;
   padding: 0;

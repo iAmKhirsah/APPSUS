@@ -29,8 +29,9 @@ export default {
       });
     },
     removeNote(id) {
-      asyncStorageService.remove('notes', id);
-      this.loadNotes();
+      asyncStorageService.remove('notes', id).then(() => {
+        this.loadNotes();
+      });
     },
   },
 };

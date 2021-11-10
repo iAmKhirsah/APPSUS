@@ -1,9 +1,15 @@
 .notes-container {
   display: flex;
+  flex-wrap: wrap;
+  margin-top: 40px;
 }
 .note {
   background-color: aqua;
   width: 200px;
   height: 200px;
   margin: 5px;
+}
+.note-control-container{
+  display: flex;
+  margin: 0;
 }
