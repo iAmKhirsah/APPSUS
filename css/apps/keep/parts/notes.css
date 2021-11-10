@@ -1,24 +1,29 @@
 .notes-container {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
 }
+
 .note {
-  background-color: aqua;
-  width: 200px;
-  height: 200px;
-  margin: 5px;
+    background-color: aqua;
+    width: 200px;
+    height: 200px;
+    margin: 5px;
 }
+
 .note-control-container {
-  display: flex;
-  margin: 0;
+    display: flex;
+    margin: 0;
 }
+
 .note-text-input {
-  width: 100%;
+    width: 100%;
 }
+
 .add-note-form {
-  width: 200px;
+    width: 200px;
 }
+
 .add-note-form input {
-  width: 100%;
+    width: 100%;
 }

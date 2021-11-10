@@ -1,5 +1,4 @@
 import { emailService } from "../services/email-service.js";
-import longText from "./long-text.cmp.js"
 export default {
     name: 'email-preview',
     props: ['email'],
@@ -36,13 +35,11 @@ export default {
                 today.getFullYear() === sentAt.getFullYear()) {
                 return sentAt.toLocaleTimeString()
             }
-            return sentAt.toLocaleDateString() + " " + dateTime.toLocaleTimeString()
+            return sentAt.toLocaleDateString() + " " + sentAt.toLocaleTimeString()
         },
         markReadButton() {
             return (this.email.isRead) ? 'Mark Unread' : 'Mark Read';
         }
     },
-    components: {
-        longText
-    }
+
 }

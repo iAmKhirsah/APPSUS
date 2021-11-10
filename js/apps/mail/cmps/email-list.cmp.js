@@ -3,7 +3,6 @@ export default {
     name: 'email-list',
     props: ['emails'],
     template: `
-        <!-- {{emails}} -->
         <ul class="email-list">
             <li v-for="email in emails" :key="email.id">
                 <email-preview :email="email"/>
@@ -12,14 +11,9 @@ export default {
         
     `,
     data() {
-        return {
-            // emails: null
-        }
+        return {}
     },
-    created() {
-        // emailService.query()
-        //     .then(emails => console.log(emails));
-    },
+    created() {},
     components: {
         emailPreview
     }
