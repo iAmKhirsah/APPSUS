@@ -9,7 +9,16 @@
   height: 200px;
   margin: 5px;
 }
-.note-control-container{
+.note-control-container {
   display: flex;
   margin: 0;
+}
+.note-text-input {
+  width: 100%;
+}
+.add-note-form {
+  width: 200px;
+}
+.add-note-form input {
+  width: 100%;
 }

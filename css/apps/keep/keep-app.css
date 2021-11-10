@@ -1,2 +1,8 @@
 @import '../keep/parts/notes.css';
 @import '../keep/cmps/note-add.css';
+
+
+textarea {
+ resize: none;
+ width: 100%;
+}

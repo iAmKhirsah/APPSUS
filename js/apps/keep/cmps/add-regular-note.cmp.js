@@ -1,8 +1,8 @@
 export default {
   //   props: ['note.type'],
   template: `
-       <form @submit.prevent="sendNote"> 
-        <input v-model="note.info.title" type="text" placeholder="Title">
+       <form @submit.prevent="sendNote" class="add-note-form"> 
+        <input type="text" v-model="note.info.title" placeholder="Title">
         <!-- <input v-model="note.info.txt" type="text" placeholder="Take note..."> -->
         <textarea v-model="note.info.txt" placeholder="Take note..." rows="4" cols="50"></textarea>
         <button>Save</button>

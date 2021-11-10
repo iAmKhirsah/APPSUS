@@ -1,6 +1,6 @@
 export default {
   template: `
-         <form @submit.prevent="sendNote"> 
+         <form @submit.prevent="sendNote" class="add-note-form"> 
           <img v-if="note.info.url" :src="note.info.url" width="150px" height="150px"/>
           <input @change="uploadImage" type="file" accept="image/*" />
           <input v-model="note.info.title" type="text" placeholder="Title">
