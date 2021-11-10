@@ -1,5 +1,7 @@
-import { storageService } from "../../../../services/async-storage-service.js";
+import { asyncStorageService } from "../../../../services/async-storage-service.js";
+import { storageService } from "../../../../services/storage.service.js";
 import { utilService } from "../../../../services/util.service.js";
+storageService
 export const emailService = {
     query,
     save,
@@ -22,19 +24,19 @@ const email = {
 }
 
 function query() {
-    return storageService.query(EMAILS_KEY)
+    return asyncStorageService.query(EMAILS_KEY)
 }
 
 function getById(emailId) {
-    return storageService.get(EMAILS_KEY, emailId);
+    return asyncStorageService.get(EMAILS_KEY, emailId);
 }
 
 function save(email) {
-    return storageService.put(EMAILS_KEY, email);
+    return asyncStorageService.put(EMAILS_KEY, email);
 }
 
 function _createEmails() {
-    let emails = utilService.loadFromStorage(EMAILS_KEY);
+    let emails = storageService.loadFromStorage(EMAILS_KEY);
     if (!emails || !emails.length) {
         emails = [
             createEmail(),
