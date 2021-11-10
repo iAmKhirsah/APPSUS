@@ -1,18 +1,26 @@
-import { noteService } from '../services/note.service.js';
-import dynamicKeep from './dynamic-keep.cmp.js';
+import noteTxt from './note-txt.cmp.js';
+import noteImg from './notes-img.cmp.js';
+import noteTodos from './note-todos.cmp.js';
+
 export default {
-  props: ['notes'],
+  props: ['note'],
   components: {
-    dynamicKeep,
+    noteTxt,
+    noteImg,
+    noteTodos,
   },
   template: `
-    <section>
-        <!-- <h1>Hello</h1> -->
-        <div v-for="note in notes" :key="note.id">
-        <dynamic-keep :note="note"/>
-        </div>
-    </section>`,
-  data() {
-    return {};
-  },
+    <div>
+        <component :note="note" :is="noteType" class="note">{{note}}</component>
+    </div>`,
+    methods: {
+        
+    },
+  computed: {
+    noteType() {
+      if (this.note.type === 'note-txt') return noteTxt;
+      if (this.note.type === 'note-img') return noteImg;
+      if (this.note.type === 'note-todos') return noteTodos;
+    },
+  }
 };

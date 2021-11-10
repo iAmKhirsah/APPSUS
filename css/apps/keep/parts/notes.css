@@ -1,0 +1,9 @@
+.notes-container {
+  display: flex;
+}
+.note {
+  background-color: aqua;
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+}

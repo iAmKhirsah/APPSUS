@@ -14,7 +14,7 @@ const notes = [
     id: 'n102',
     type: 'note-img',
     info: {
-      url: 'http://some-img/me',
+      url: 'https://static.independent.co.uk/2021/06/16/08/newFile-4.jpg?width=982&height=726&auto=webp&quality=75',
       title: 'Bobi and Me',
     },
     style: {

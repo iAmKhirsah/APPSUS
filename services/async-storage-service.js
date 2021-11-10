@@ -1,3 +1,5 @@
+import { utilService } from './util.service.js';
+
 export const asyncStorageService = {
   query,
   get,
@@ -19,7 +21,7 @@ function get(entityType, entityId) {
 }
 
 function post(entityType, newEntity) {
-  newEntity.id = _makeId();
+  newEntity.id = utilService.makeId();
   return query(entityType).then((entities) => {
     entities.push(newEntity);
     _save(entityType, entities);
@@ -53,5 +55,5 @@ function remove(entityType, entityId) {
 }
 
 function _save(entityType, entities) {
-    localStorage.setItem(entityType, JSON.stringify(entities))
+  localStorage.setItem(entityType, JSON.stringify(entities));
 }

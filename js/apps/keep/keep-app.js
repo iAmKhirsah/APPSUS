@@ -1,13 +1,16 @@
 import { noteService } from './services/note.service.js';
-import keepPreview from './cmps/keep-preview.cmp.js';
-
+import { asyncStorageService } from '../../../services/async-storage-service.js';
+import notesList from './cmps/notes-list.cmp.js';
+import noteAdd from './cmps/note-add.cmp.js';
 export default {
   components: {
-    keepPreview,
+    notesList,
+    noteAdd,
   },
   template: `
     <section class="keep-app">
-      <keep-preview :notes="notes" />
+      <note-add @AddedNote="loadNotes"/>
+      <notes-list :notes="notes" @remove="removeNote"/>
     </section>
     `,
   data() {
@@ -20,11 +23,14 @@ export default {
   },
   methods: {
     loadNotes() {
-      console.log(noteService.query());
       noteService.query().then((notes) => {
         this.notes = notes;
         console.log(this.notes);
       });
+    },
+    removeNote(id) {
+      asyncStorageService.remove('notes', id);
+      this.loadNotes();
     },
   },
 };
