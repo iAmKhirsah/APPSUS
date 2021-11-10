@@ -1,3 +1,4 @@
+const NOTES_KEY = 'notes';
 const notes = [
   {
     id: 'n101',
@@ -30,3 +31,7 @@ const notes = [
     },
   },
 ];
+function query() {
+  var books = JSON.parse(localStorage.getItem(BOOKS_KEY)) || [];
+  return Promise.resolve(books);
+}
