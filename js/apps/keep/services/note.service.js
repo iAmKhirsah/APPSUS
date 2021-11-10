@@ -1,3 +1,5 @@
+import { utilService } from '../../../../services/util.service.js';
+
 const NOTES_KEY = 'notes';
 const notes = [
   {
@@ -31,7 +33,22 @@ const notes = [
     },
   },
 ];
+var gNotes = notes;
+
+export const noteService = {
+  query,
+};
+
 function query() {
-  var books = JSON.parse(localStorage.getItem(BOOKS_KEY)) || [];
-  return Promise.resolve(books);
+  var notes = JSON.parse(localStorage.getItem(NOTES_KEY)) || [];
+  return Promise.resolve(notes);
+}
+
+_createNotes();
+function _createNotes() {
+  let notes = utilService.loadFromStorage(NOTES_KEY);
+  if (!notes || !notes.length) {
+    utilService.saveToStorage(NOTES_KEY, gNotes);
+  }
+  return notes;
 }
