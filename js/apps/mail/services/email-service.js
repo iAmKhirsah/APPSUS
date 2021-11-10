@@ -52,7 +52,7 @@ function _createEmails() {
     }
 }
 
-function createEmail(subject = 'Incoming mail', body = 'Mail body', isRead = false, from = 'Anonymouse@mail.com') {
+function createEmail(subject = 'Incoming mail', body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam.', isRead = false, from = 'Anonymouse@mail.com') {
     return {
         id: utilService.makeId(),
         subject,
