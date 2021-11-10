@@ -1,11 +1,13 @@
 import { emailService } from "./services/email-service.js";
 import emailList from "./cmps/email-list.cmp.js";
 import emailFilter from "./cmps/email-filter.cmp.js";
+import emailFolderFilter from "./cmps/email-folder-filter.cmp.js";
 export default {
     name: 'email-app',
     template: `
     <section v-if="emails" class="email-app">
-        <email-filter @filtered="setFilter"/>
+        <email-folder-filter/>
+        <email-filter @folderFiltered = "setFolderFilter" @filtered="setFilter"/>
         <email-list :emails="emailsToShow"/>
         <span class="unread-count">{{unreadCount}}</span>
     </section>
@@ -25,11 +27,14 @@ export default {
     methods: {
         setFilter(filterBy) {
             this.filterBy = filterBy;
+        },
+        setFolderFilter(criteria) {
+            this.criteria = criteria;
         }
     },
     computed: {
         emailsToShow() {
-            if (!this.filterBy) return this.emails;
+            if (!this.filterBy) return this.emails.filter(email => email.criteria = this.criteria);
             const searchStr = this.filterBy.search.toLowerCase();
             console.log('filterBy', this.filterBy.read);
             return this.emails.filter(email => {
@@ -43,7 +48,8 @@ export default {
     },
     components: {
         emailList,
-        emailFilter
+        emailFilter,
+        emailFolderFilter
     }
 
 }

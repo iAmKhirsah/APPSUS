@@ -1,18 +1,4 @@
-.email-preview {
-    background-color: lightcyan;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid rgb(211, 211, 211);
-    margin-inline-end: 10px;
-    margin-inline-start: 10px;
-    cursor: pointer;
-}
-
-.email-preview:hover {
-    z-index: 999;
-    border: 1px solid black;
-}
-
+@import 'cmps.css';
 .bold {
     font-weight: bold;
 }
