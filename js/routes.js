@@ -1,5 +1,5 @@
-import mailApp from './apps/mail.js';
-import keepApp from './apps/keep.js';
+import mailApp from './apps/mail/mail-app.js';
+import keepApp from './apps/keep/keep-app.js';
 import homePage from './pages/app-about-cmp.js';
 
 const routes = [
