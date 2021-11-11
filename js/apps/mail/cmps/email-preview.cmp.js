@@ -1,10 +1,11 @@
 import { emailService } from "../services/email-service.js";
-import longText from "./long-text.cmp.js"
+import { eventBus } from "../../../../services/event-but-service.js";
 export default {
     name: 'email-preview',
     props: ['email'],
     template: `
         <section :class="{bold : email.isRead}" class="email-preview">
+                <span :class="{starred : email.criteria.starred}" @click="star">&#9733;</span>
                 <span class="preview-subject">{{subjectPreview}}</span>
                 <span class="preview-body">{{bodyPreview}}</span>
                 <button @click="markRead">{{markReadButton}}</button>
@@ -19,6 +20,13 @@ export default {
         markRead() {
             this.email.isRead = !this.email.isRead;
             emailService.save(this.email);
+        },
+        star() {
+            this.email.criteria.starred = !this.email.criteria.starred;
+            emailService.save(this.email)
+                .then(() => {
+                    if (!this.email.criteria.starred) eventBus.$emit('starChange');
+                });
         }
     },
     computed: {
@@ -36,13 +44,11 @@ export default {
                 today.getFullYear() === sentAt.getFullYear()) {
                 return sentAt.toLocaleTimeString()
             }
-            return sentAt.toLocaleDateString() + " " + dateTime.toLocaleTimeString()
+            return sentAt.toLocaleDateString() + " " + sentAt.toLocaleTimeString()
         },
         markReadButton() {
             return (this.email.isRead) ? 'Mark Unread' : 'Mark Read';
-        }
+        },
     },
-    components: {
-        longText
-    }
+
 }

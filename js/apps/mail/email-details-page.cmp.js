@@ -1,5 +1,5 @@
 import { emailService } from "./services/email-service.js";
-
+import { eventBus } from "../../../services/event-but-service.js";
 export default {
     name: 'email-details',
     template: `
@@ -8,8 +8,9 @@ export default {
     <h1>{{email.subject}}</h1>
     <p>{{email.body}}</p>
     <div>{{email.sentAt}}</div>
-        <router-link to="/mail"><button @click="deleteEmail">delete</button></router-link>
-        <router-link to="/mail">Back</router-link>
+    <router-link to="/mail"><button @click="deleteEmail">delete</button></router-link>
+    <router-link to="/mail">Back</router-link>
+    <button @click="saveNote">Save as note</button>
     </section>
     `,
     data() {
@@ -24,16 +25,18 @@ export default {
                 this.email = email
                 this.email.isRead = true;
                 emailService.save(this.email);
-                emailService.query().then((emails) => console.log(emailService.filterByCriteria(emails, 'inbox')))
             });
     },
     methods: {
         deleteEmail() {
-            console.log(this.email.id)
             emailService.remove(this.email.id);
-            console.log(this.email.id)
-                // emailService.query()
-                //     .then(emails => console.log(emails))
+        },
+        saveNote() {
+            eventBus.$emit('emailToNote', {
+                from: this.email.from,
+                subject: this.email.subject,
+                body: this.email.body
+            });
         }
     }
 }
