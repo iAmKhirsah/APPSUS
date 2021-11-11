@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         save(status) {
-            emailService.save(emailService.createEmail(this.email.subject,
+            emailService.saveNew(emailService.createEmail(this.email.subject,
                 this.email.body,
                 false,
                 this.email.to, { status, starred: false }
