@@ -6,7 +6,7 @@ export default {
     template: `
         <section :class="{bold : !email.isRead}" class="email-preview">
                 <span :class="{starred : email.criteria.starred}" class="star" @click.prevent="star" v-html="starToShow"></span>
-                <span class="preview-to">{{email.from}}</span>
+                <span class="preview-to">{{toPreview}}</span>
                 <span class="preview-subject">{{subjectPreview}}</span>
                 <span class="preview-body">{{bodyPreview}}</span>
                 <span @click.prevent="markRead" v-html="markAsReadShow"></span>
@@ -30,11 +30,14 @@ export default {
         }
     },
     computed: {
+        toPreview() {
+            return (this.email.from.length > 20) ? this.email.from.slice(0, 20) + '...' : this.email.from;
+        },
         subjectPreview() {
-            return (this.email.subject.length > 15) ? this.email.subject.slice(0, 15) + '...' : this.email.subject;
+            return (this.email.subject.length > 10) ? this.email.subject.slice(0, 10) + '...' : this.email.subject;
         },
         bodyPreview() {
-            return (this.email.body.length > 80) ? this.email.body.slice(0, 80) + '...' : this.email.body;
+            return (this.email.body.length > 50) ? this.email.body.slice(0, 50) + '...' : this.email.body;
         },
         dateTime() {
             const today = new Date();

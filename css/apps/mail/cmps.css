@@ -1,5 +1,6 @@
 .email-list {
     list-style: none;
+    margin-block-start: 10px;
 }
 
 .bold {
