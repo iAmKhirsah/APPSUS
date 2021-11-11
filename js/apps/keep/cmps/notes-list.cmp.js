@@ -6,15 +6,17 @@ export default {
     keepPreview,
   },
   template: `
-    <section class="notes-container">
+    <section class="note-container">
         <div v-for="note in notes" :key="note.id">
-          <button @click="remove(note.id)">X</button>
-          <keep-preview :note="note"/>
+          <keep-preview :note="note" @remove="remove" @update="update"/>
         </div>
     </section>`,
   methods: {
     remove(noteId) {
       this.$emit('remove', noteId);
+    },
+    update(noteId) {
+      this.$emit('update', noteId);
     },
   },
 };

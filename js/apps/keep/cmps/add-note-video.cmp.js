@@ -1,10 +1,14 @@
 export default {
+  props: ['noteToEdit'],
   template: `
-         <form @submit.prevent="sendNote" class="add-note-form"> 
+         <form @submit.prevent="sendNote"> 
+         <iframe v-if="note.info.url" width="150" height="150"
+            :src="note.info.url">
+          </iframe>
           <input type="text" v-model="note.info.title" placeholder="Title">
-          <input type="text" v-model="note.info.url" @change="processLink" placeholder="Video Url...">
+          <input type="text" v-model="note.info.url" @change="processLink" placeholder="Youtube Url...">
           <textarea v-model="note.info.txt" placeholder="Take note..." rows="4" cols="50"></textarea>
-          <button>Save</button>
+          <button v-show="!noteToEdit">Save</button>
          </form>`,
   data() {
     return {
@@ -18,6 +22,11 @@ export default {
         },
       },
     };
+  },
+  created() {
+    if (this.noteToEdit) {
+      this.note = this.noteToEdit;
+    }
   },
   methods: {
     processLink() {

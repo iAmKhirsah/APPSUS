@@ -13,9 +13,16 @@ export default {
   },
   template: `
     <div>
-        <component :note="note" :is="noteType" class="note">{{note}}</component>
+        <component :note="note" :is="noteType" class="note" @remove="remove" @update="update">{{note}}</component>
     </div>`,
-  methods: {},
+  methods: {
+    remove(noteId) {
+      this.$emit('remove', noteId);
+    },
+    update(noteId) {
+      this.$emit('update', noteId);
+    },
+  },
   computed: {
     noteType() {
       if (this.note.type === 'note-txt') return noteTxt;
