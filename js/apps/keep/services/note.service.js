@@ -11,6 +11,9 @@ const notes = [
     info: {
       txt: 'Fullstack Me Baby!',
     },
+    style: {
+      backgroundColor: '#808080',
+    },
   },
   {
     id: 'n102',
@@ -20,7 +23,7 @@ const notes = [
       title: 'Bobi and Me',
     },
     style: {
-      backgroundColor: '#00d',
+      backgroundColor: '#808080',
     },
   },
   {
@@ -33,6 +36,9 @@ const notes = [
         { txt: 'Coding power', doneAt: 187111111 },
       ],
     },
+    style: {
+      backgroundColor: '#808080',
+    },
   },
   {
     id: 'n104',
@@ -40,6 +46,9 @@ const notes = [
     info: {
       url: 'https://www.youtube.com/embed/tgbNymZ7vqY',
       title: 'my first video',
+    },
+    style: {
+      backgroundColor: '#808080',
     },
   },
 ];

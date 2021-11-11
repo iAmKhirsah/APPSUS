@@ -15,6 +15,9 @@ export default {
           title: null,
           todos: [{ txt: null, doneAt: null }],
         },
+        style: {
+          backgroundColor: '#808080',
+        },
       },
       answers: [],
     };

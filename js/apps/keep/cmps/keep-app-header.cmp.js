@@ -1,11 +1,23 @@
+import keepAppFilter from './keep-app-filter.cmp.js';
+
 export default {
+  components: {
+    keepAppFilter,
+  },
   template: `
-   <section>
+   <section class="keep-header">
        <div>Logo(placeholder)</div>
-       <input type="search"/>
+       <div class="search-bar">
+        <keep-app-filter @filtered="filtered"/>
+       </div>
         <nav>
-            <h1>Home</h1>
-            <h1>About</h1>
+            <router-link to="/">Home </router-link>
+            <router-link to="/mail">Mail </router-link>
         </nav>
    </section>`,
+  methods: {
+    filtered(filterBy) {
+      this.$emit('filtered', filterBy);
+    },
+  },
 };

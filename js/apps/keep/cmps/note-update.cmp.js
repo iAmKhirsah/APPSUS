@@ -12,13 +12,19 @@ export default {
   },
   props: ['noteId'],
   template: `
-    <section class="note-edit-container">
+    <section class="note-edit-container" :style="'background-color: ' + noteToEdit?.style.backgroundColor">
                   <button class="close-update-screen" @click="closeEditScreen">X</button>
                   <add-regular-note @noteTxt="saveNote"  v-if="noteToEdit?.type === 'note-txt'" :noteToEdit="noteToEdit"/>
                   <add-note-img @noteImg="saveNote"  v-if="noteToEdit?.type === 'note-img'" :noteToEdit="noteToEdit"/>
                   <add-note-todos @noteTodo="saveNote"  v-if="noteToEdit?.type === 'note-todos'" :noteToEdit="noteToEdit"/>
                   <add-note-video @noteVid="saveNote"  v-if="noteToEdit?.type === 'note-vid'" :noteToEdit="noteToEdit"/>
+                  <div>
+                  <div class="color-container">
+                  <i class="fas fa-palette" :style="'background-color: ' + noteToEdit?.style.backgroundColor"></i>
+                  <input type="color" v-model="noteToEdit?.style.backgroundColor"/>
+                  </div>
                   <button @click="saveNote">Update!</button>
+                  </div>
     </section>`,
   data() {
     return {

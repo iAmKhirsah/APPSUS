@@ -18,6 +18,9 @@ export default {
           txt: null,
           title: null,
         },
+        style: {
+          backgroundColor: '#808080',
+        },
       },
     };
   },
