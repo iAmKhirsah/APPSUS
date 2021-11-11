@@ -1,5 +1,6 @@
 export default {
     name: 'email-filter',
+    props: ['emails'],
     template: `
         <section class="top-bar">
             <div class="logo">
@@ -7,12 +8,15 @@ export default {
                 <span>Gmail</span>
             </div>
 
-                <input class='search-input' id="search-filter" type="text" v-model="filterBy.search" @input="filter" placeholder="Search mail"/>
+            <input class='search-input' id="search-filter" type="text" v-model="filterBy.search" @input="filter" placeholder="Search mail"/>
                 
-            <label for="read-filter">
-            Read only
+            
+            <label class='read-filter' for="read-filter">
+                Read only
                 <input id="read-filter" type="checkbox" v-model="filterBy.read" @change="filter"/>
             </label>
+            <span class="unread-count">Unread count : {{unreadCount}}</span>
+
             <section class="sorting">
                 <span>Sort By : </span>
                 <label for="new">new
@@ -35,6 +39,11 @@ export default {
             },
             sortBy: null
 
+        }
+    },
+    computed: {
+        unreadCount() {
+            return this.emails.filter(email => !email.isRead).length
         }
     },
     methods: {

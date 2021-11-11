@@ -1,6 +1,9 @@
 @import 'cmps.css';
 @import 'cmps/top-bar.css';
 @import 'cmps/side-bar.css';
+@import 'cmps/email-preview.css';
+@import 'cmps/email-details.css';
+@import 'cmps/email-compose.css';
 .email-app {
     display: grid;
     grid-template-columns: 200px 1fr;
@@ -23,9 +26,3 @@
     grid-column-start: 2;
     grid-row-start: 2;
 }
-
-
-/*
-.top-bar {
-    grid-column-start: 1, 1;
-} */

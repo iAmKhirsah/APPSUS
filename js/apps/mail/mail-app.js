@@ -9,11 +9,10 @@ export default {
     name: 'email-app',
     template: `
         <section v-if="emails" class="email-app">
-            <top-bar @filtered="setFilter" @sortBy="sortBy" @compose="isCompose = !isCompose"/>
+            <top-bar :emails="emailsToShow" @filtered="setFilter" @sortBy="sortBy" @compose="isCompose = !isCompose"/>
             <side-bar @setCriteria="setCriteria" @compose="isCompose = !isCompose"/>
             <email-list :emails="emailsToShow"/>
-            <!-- <span class="unread-count">{{unreadCount}}</span> -->
-            <!-- <email-compose v-if="isCompose" @compose="isCompose = !isCompose"/> -->
+            <email-compose v-if="isCompose" @compose="isCompose = !isCompose"/>
         </section>
         <section v-else>Loading</section>
     `,
@@ -63,7 +62,7 @@ export default {
         emailList,
         topBar,
         sideBar,
-        emailCompose
+        emailCompose,
     }
 
 }

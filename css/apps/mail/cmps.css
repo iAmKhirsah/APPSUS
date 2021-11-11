@@ -1,51 +1,7 @@
-/* preview */
-
-.email-preview {
-    background-color: lightcyan;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid rgb(211, 211, 211);
-    margin-inline-end: 10px;
-    margin-inline-start: 10px;
-    cursor: pointer;
-}
-
-.email-preview:hover {
-    z-index: 999;
-    border: 1px solid black;
-}
-
-.starred {
-    color: gold;
-}
-
-.star {
-    line-height: 100%;
-    vertical-align: middle;
-}
-
-.star:hover {
-    color: whitesmoke;
-}
-
-
-/* email-list */
-
 .email-list {
     list-style: none;
 }
 
 .bold {
     font-weight: bold;
-}
-
-
-/* compose */
-
-.compose-email form {
-    max-width: 30%;
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
 }

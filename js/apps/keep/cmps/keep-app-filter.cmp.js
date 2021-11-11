@@ -1,5 +1,5 @@
 export default {
-  template: `
+    template: `
     <section @click="showFeatures" @blur="closeFeatures">
             <span class="magnifying-glass"></span>
             <input @input="filter" v-model="filterBy.title" type="search" placeholder="Search...">
@@ -11,30 +11,30 @@ export default {
     </select>
     <span v-if="clicked" class="clear-search" @click="clearSearch">X</span>
     </section>`,
-  data() {
-    return {
-      clicked: false,
-      filterBy: {
-        title: '',
-        type: 'note-txt',
-      },
-    };
-  },
-  methods: {
-    clearSearch() {
-      this.filterBy.title = '';
-      this.filterBy.type = '';
+    data() {
+        return {
+            clicked: false,
+            filterBy: {
+                title: '',
+                type: 'note-txt',
+            },
+        };
     },
-    showFeatures() {
-      this.clicked = true;
+    methods: {
+        clearSearch() {
+            this.filterBy.title = '';
+            this.filterBy.type = '';
+        },
+        showFeatures() {
+            this.clicked = true;
+        },
+        closeFeatures() {
+            this.clicked = false;
+        },
+        filter() {
+            console.log(this.filterBy.type);
+            this.$emit('filtered', JSON.parse(JSON.stringify(this.filterBy)));
+            this.filterBy.type = '';
+        },
     },
-    closeFeatures() {
-      this.clicked = false;
-    },
-    filter() {
-      console.log(this.filterBy.type);
-      this.$emit('filtered', JSON.parse(JSON.stringify(this.filterBy)));
-      this.filterBy.type = '';
-    },
-  },
 };
