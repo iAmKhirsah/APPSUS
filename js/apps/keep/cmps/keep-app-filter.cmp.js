@@ -11,7 +11,6 @@ export default {
             <option value="note-vid">Video</option>
     </select>
     </section>`,
-<<<<<<< HEAD
   data() {
     return {
       clicked: false,
@@ -33,32 +32,3 @@ export default {
     },
   },
 };
-=======
-    data() {
-        return {
-            clicked: false,
-            filterBy: {
-                title: '',
-                type: 'note-txt',
-            },
-        };
-    },
-    methods: {
-        clearSearch() {
-            this.filterBy.title = '';
-            this.filterBy.type = '';
-        },
-        showFeatures() {
-            this.clicked = true;
-        },
-        closeFeatures() {
-            this.clicked = false;
-        },
-        filter() {
-            console.log(this.filterBy.type);
-            this.$emit('filtered', JSON.parse(JSON.stringify(this.filterBy)));
-            this.filterBy.type = '';
-        },
-    },
-};
->>>>>>> 58373321cdb051e2e95146bb4fcaeebfaf785d24
