@@ -3,14 +3,17 @@ import { asyncStorageService } from '../../../services/async-storage-service.js'
 import notesList from './cmps/notes-list.cmp.js';
 import noteAdd from './cmps/note-add.cmp.js';
 import noteUpdate from './cmps/note-update.cmp.js';
+import keepAppHeader from './cmps/keep-app-header.cmp.js';
 export default {
   components: {
     notesList,
     noteAdd,
     noteUpdate,
+    keepAppHeader,
   },
   template: `
     <section class="keep-app">
+      <keep-app-header/>
       <note-add @AddedNote="loadNotes"/>
       <notes-list :notes="notes" @remove="removeNote" @update="updateNote"/>
       <note-update v-show="noteId" v-if="noteId" :noteId="noteId" @UpdatedNote="noteId = null" @closeUpdate="noteId = null"/>
