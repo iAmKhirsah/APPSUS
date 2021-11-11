@@ -1,8 +1,7 @@
 import { emailService } from "./services/email-service.js";
 import emailList from "./cmps/email-list.cmp.js";
-import emailFilter from "./cmps/email-filter.cmp.js";
-import emailFolderFilter from "./cmps/email-folder-filter.cmp.js";
-import composeSort from "./cmps/compose-sort.cmp.js";
+import topBar from "./cmps/top-bar.cmp.js";
+import sideBar from "./cmps/side-bar.cmp.js";
 import emailCompose from "./cmps/email-compose.cmp.js";
 import { eventBus } from "../../../services/event-but-service.js";
 
@@ -10,12 +9,11 @@ export default {
     name: 'email-app',
     template: `
         <section v-if="emails" class="email-app">
-            <compose-sort @sortBy="sortBy" @compose="isCompose = !isCompose"/>
-            <email-folder-filter @setCriteria="setCriteria"/>
-            <email-filter @filtered="setFilter"/>
+            <top-bar @filtered="setFilter" @sortBy="sortBy" @compose="isCompose = !isCompose"/>
+            <side-bar @setCriteria="setCriteria" @compose="isCompose = !isCompose"/>
             <email-list :emails="emailsToShow"/>
-            <span class="unread-count">{{unreadCount}}</span>
-            <email-compose v-if="isCompose" @compose="isCompose = !isCompose"/>
+            <!-- <span class="unread-count">{{unreadCount}}</span> -->
+            <!-- <email-compose v-if="isCompose" @compose="isCompose = !isCompose"/> -->
         </section>
         <section v-else>Loading</section>
     `,
@@ -63,9 +61,8 @@ export default {
     },
     components: {
         emailList,
-        emailFilter,
-        emailFolderFilter,
-        composeSort,
+        topBar,
+        sideBar,
         emailCompose
     }
 

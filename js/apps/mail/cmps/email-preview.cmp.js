@@ -5,7 +5,7 @@ export default {
     props: ['email'],
     template: `
         <section :class="{bold : email.isRead}" class="email-preview">
-                <span :class="{starred : email.criteria.starred}" @click="star">&#9733;</span>
+                <span :class="{starred : email.criteria.starred}" class="star" @click="star"><i class="far fa-star"></i></span>
                 <span class="preview-subject">{{subjectPreview}}</span>
                 <span class="preview-body">{{bodyPreview}}</span>
                 <button @click="markRead">{{markReadButton}}</button>
@@ -21,7 +21,7 @@ export default {
             this.email.isRead = !this.email.isRead;
             emailService.save(this.email);
         },
-        star() {
+        star(ev) {
             this.email.criteria.starred = !this.email.criteria.starred;
             emailService.save(this.email)
                 .then(() => {
@@ -49,6 +49,11 @@ export default {
         markReadButton() {
             return (this.email.isRead) ? 'Mark Unread' : 'Mark Read';
         },
+        starToShow() {
+            const starred = '<i class="fas fa-star"></i>';
+            const notStarred = '<i class="far fa-star"></i>';
+            return (this.email.criteria.starred) ? starred.slice(0, 1).slice(starred.length - 2, starred.length - 1) : notStarred.slice(0, 1).slice(starred.length - 2, starred.length - 1);
+        }
     },
 
 }

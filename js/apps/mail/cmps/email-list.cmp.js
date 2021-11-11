@@ -10,6 +10,9 @@ export default {
         </ul>
         
     `,
+    created() {
+        console.log('true', true);
+    },
     data() {
         return {}
     },
