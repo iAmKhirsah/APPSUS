@@ -15,7 +15,7 @@ export default {
     </div>`,
   data() {
     return {
-      color: null,
+      color: '#808080',
     };
   },
   methods: {

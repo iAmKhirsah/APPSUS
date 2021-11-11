@@ -6,7 +6,7 @@ export default {
             :src="note.info.url">
           </iframe>
           <input type="text" v-model="note.info.title" placeholder="Title">
-          <input type="text" v-model="note.info.url" @change="processLink" placeholder="Youtube Url...">
+          <input type="text" v-model="note.info.url" @input="processLink" placeholder="Youtube Url...">
           <textarea v-model="note.info.txt" placeholder="Take note..." rows="4" cols="50"></textarea>
           <button v-show="!noteToEdit">Save</button>
          </form>`,

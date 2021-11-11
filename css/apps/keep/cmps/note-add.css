@@ -8,6 +8,7 @@
 }
 .main-note-form {
   background-color: green;
+  border-radius: 5px;
 }
 
 .main-note-form textarea {

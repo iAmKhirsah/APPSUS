@@ -10,6 +10,7 @@ const notes = [
     isPinned: true,
     info: {
       txt: 'Fullstack Me Baby!',
+      title: '',
     },
     style: {
       backgroundColor: '#808080',

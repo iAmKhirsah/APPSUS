@@ -13,12 +13,12 @@ export default {
   template: `
     <section class="main-note-controls">
             <div>
-              <form class="main-note-form" :style="'background-color: ' + note.style.backgroundColor">
+              <form class="main-note-form" @focus="hideControls" :style="'background-color: ' + note.style.backgroundColor">
                   <add-regular-note @noteTxt="saveNote" v-show="note.type === 'note-txt'"/>
                   <add-note-img @noteImg="saveNote" v-show="note.type === 'note-img'"/>
                   <add-note-todos @noteTodo="saveNote" v-show="note.type === 'note-todos'"/>
                   <add-note-video @noteVid="saveNote" v-show="note.type === 'note-vid'"/>
-                <div class="controls-container">
+                <div class="controls-container" v-show="controls">
                   <div class="color-container">
                   <i class="fas fa-palette" :style="'background-color: ' + note.style.backgroundColor"></i>
                   <input type="color" v-model="note.style.backgroundColor"/>
@@ -33,6 +33,7 @@ export default {
   data() {
     return {
       fullInput: false,
+      controls: true,
       note: {
         id: null,
         type: 'note-txt',
@@ -43,11 +44,15 @@ export default {
     };
   },
   methods: {
+    hideControls() {
+      this.controls = !this.controls;
+    },
     setNoteType(type) {
       this.note.type = type;
     },
     saveNote(note) {
-      if (!note.info.title && !note.info.txt) return;
+      // if (!note.info.title && !note.info.txt) return;
+      if (!note.info.title) note.info.title = '';
       console.log(note);
       note.style.backgroundColor = this.note.style.backgroundColor;
       asyncStorageService.post('notes', note).then(() => {

@@ -23,7 +23,7 @@ export default {
     return {
       notes: null,
       noteId: null,
-      filterBy: null,
+      filterBy: '',
     };
   },
   created() {
@@ -62,16 +62,17 @@ export default {
   computed: {
     notesToShow() {
       console.log(this.filterBy);
-      if (!this.filterBy) return this.notes;
+      if (!this.filterBy.type && !this.filterBy.title) return this.notes;
       const type = this.filterBy.type;
       const searchStr = this.filterBy.title.toLowerCase();
       if (!this.filterBy.title && this.filterBy.type) {
         const notesToShow = this.notes.filter((note) => {
-          return note.type.toLowerCase().includes(type);
+          return note.type.includes(type);
         });
         return notesToShow;
       } else if (!this.filterBy.type && this.filterBy.title) {
         const notesToShow = this.notes.filter((note) => {
+          if (!note.info.title) return;
           return note.info.title.toLowerCase().includes(searchStr);
         });
         return notesToShow;
@@ -80,7 +81,7 @@ export default {
           if (!note.info.title) return;
           return (
             note.info.title.toLowerCase().includes(searchStr) &&
-            note.type.toLowerCase().includes(type)
+            note.type.includes(type)
           );
         });
         return notesToShow;

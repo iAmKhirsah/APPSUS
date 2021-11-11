@@ -31,8 +31,10 @@ export default {
     newTodo() {
       let txt = this.note.info.todos.txt;
       let doneAt = this.note.info.todos.doneAt;
+      console.log(txt);
       this.answers.push({ txt, doneAt });
-      this.note.info.todos = [{ txt: null, doneAt: null }];
+      txt = null;
+      // this.note.info.todos = [{ txt: null, doneAt: null }];
     },
     sendNote() {
       this.note.info.todos = this.answers;
