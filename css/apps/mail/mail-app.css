@@ -1,8 +1,28 @@
 @import 'cmps.css';
-.bold {
-    font-weight: bold;
+@import 'cmps/top-bar.css';
+@import 'cmps/side-bar.css';
+@import 'cmps/email-preview.css';
+@import 'cmps/email-details.css';
+@import 'cmps/email-compose.css';
+.email-app {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 60px 1fr;
 }
 
-.email-preview> :not(:last-child) {
-    /* border-inline-end: 1px solid black; */
+.top-bar {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+}
+
+.side-bar {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    grid-row-start: 2;
+    grid-row-end: span 2;
+}
+
+.email-list {
+    grid-column-start: 2;
+    grid-row-start: 2;
 }

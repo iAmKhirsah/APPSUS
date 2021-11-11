@@ -4,24 +4,24 @@ export default {
     name: 'email-preview',
     props: ['email'],
     template: `
-        <section :class="{bold : email.isRead}" class="email-preview">
-                <span :class="{starred : email.criteria.starred}" @click="star">&#9733;</span>
+        <section :class="{bold : !email.isRead}" class="email-preview">
+                <span :class="{starred : email.criteria.starred}" class="star" @click.prevent="star" v-html="starToShow"></span>
+                <span class="preview-to">{{toPreview}}</span>
                 <span class="preview-subject">{{subjectPreview}}</span>
                 <span class="preview-body">{{bodyPreview}}</span>
-                <button @click="markRead">{{markReadButton}}</button>
-                <router-link :to="'/mail/' + email.id">Details</router-link>
-                <span class="right-icons">
-                    <span class="preview-is-read">isRead : {{email.isRead}}</span>    
-                    <span class="preview-date">date : {{dateTime}}</span>
-                </span>    
+                <span @click.prevent="markRead" v-html="markAsReadShow"></span>
+                <span class="preview-date">{{dateTime}}</span>
         </section>
     `,
+    data() {
+        return {}
+    },
     methods: {
         markRead() {
             this.email.isRead = !this.email.isRead;
             emailService.save(this.email);
         },
-        star() {
+        star(ev) {
             this.email.criteria.starred = !this.email.criteria.starred;
             emailService.save(this.email)
                 .then(() => {
@@ -30,11 +30,14 @@ export default {
         }
     },
     computed: {
+        toPreview() {
+            return (this.email.from.length > 20) ? this.email.from.slice(0, 20) + '...' : this.email.from;
+        },
         subjectPreview() {
-            return (this.email.subject.length > 15) ? this.email.subject.slice(0, 15) + '...' : this.email.subject;
+            return (this.email.subject.length > 10) ? this.email.subject.slice(0, 10) + '...' : this.email.subject;
         },
         bodyPreview() {
-            return (this.email.body.length > 80) ? this.email.body.slice(0, 80) + '...' : this.email.body;
+            return (this.email.body.length > 50) ? this.email.body.slice(0, 50) + '...' : this.email.body;
         },
         dateTime() {
             const today = new Date();
@@ -46,9 +49,15 @@ export default {
             }
             return sentAt.toLocaleDateString() + " " + sentAt.toLocaleTimeString()
         },
-        markReadButton() {
-            return (this.email.isRead) ? 'Mark Unread' : 'Mark Read';
+        markAsReadShow() {
+            return (this.email.isRead) ? '<i class="fas fa-envelope"></i>' : '<i class="fas fa-envelope-open-text"></i>';
         },
+        starToShow() {
+            const starred = '<i class="fas fa-star"></i>';
+            const notStarred = '<i class="far fa-star"></i>';
+            return (this.email.criteria.starred) ? starred : notStarred;
+        }
+
     },
 
 }

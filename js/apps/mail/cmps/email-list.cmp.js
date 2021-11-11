@@ -5,11 +5,14 @@ export default {
     template: `
         <ul class="email-list">
             <li v-for="email in emails" :key="email.id">
-                <email-preview :email="email"/>
+                <router-link :to="'/mail/' + email.id"><email-preview :email="email"/></router-link>
             </li>
         </ul>
         
     `,
+    created() {
+        console.log('true', true);
+    },
     data() {
         return {}
     },

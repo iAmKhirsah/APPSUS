@@ -1,69 +1,8 @@
-/* preview */
-
-.email-preview {
-    background-color: lightcyan;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid rgb(211, 211, 211);
-    margin-inline-end: 10px;
-    margin-inline-start: 10px;
-    cursor: pointer;
-}
-
-.email-preview:hover {
-    z-index: 999;
-    border: 1px solid black;
-}
-
-.starred {
-    color: gold;
-}
-
-.star:hover {
-    color: whitesmoke;
-}
-
-
-/* email-list */
-
 .email-list {
     list-style: none;
+    margin-block-start: 10px;
 }
 
-
-/* folder-filter */
-
-.folder-list {
-    height: 100vh;
-    width: 150px;
-    display: flex;
-    flex-direction: column;
-    float: left;
-    background-color: lightgreen;
-}
-
-.folder-list:first-child {
-    margin-block-start: 5px
-}
-
-.folder-list button {
-    border: none;
-    margin-block-end: 5px;
-    text-align: left;
-    background-color: lightgreen;
-}
-
-.folder-list button:hover {
-    background-color: rgb(92, 238, 92);
-}
-
-
-/* compose */
-
-.compose-email form {
-    max-width: 30%;
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+.bold {
+    font-weight: bold;
 }

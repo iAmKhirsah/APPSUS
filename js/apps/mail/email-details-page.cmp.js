@@ -3,14 +3,16 @@ import { eventBus } from "../../../services/event-but-service.js";
 export default {
     name: 'email-details',
     template: `
-    <section v-if="email"class="email-details">
-    <h1>{{email.from}}</h1>
-    <h1>{{email.subject}}</h1>
-    <p>{{email.body}}</p>
-    <div>{{email.sentAt}}</div>
-    <router-link to="/mail"><button @click="deleteEmail">delete</button></router-link>
-    <router-link to="/mail">Back</router-link>
-    <button @click="saveNote">Save as note</button>
+    <section v-if="email" class="email-details">
+        <span><b>Composed</b> : {{email.from}}</span>
+        <span><b>Subject :</b> {{email.subject}}</span>
+        <p> {{email.body}}</p>
+        <span><b>Sent At :</b> {{dateTime}}</span>
+        <div class='detail-buttons'>
+            <router-link to="/mail" @click.native="deleteEmail">delete</router-link>
+            <router-link to="/mail">Back</router-link>
+            <button @click="saveNote">Save as note</button>
+        </div>
     </section>
     `,
     data() {
@@ -26,6 +28,18 @@ export default {
                 this.email.isRead = true;
                 emailService.save(this.email);
             });
+    },
+    computed: {
+        dateTime() {
+            const today = new Date();
+            const sentAt = new Date(this.email.sentAt);
+            if (today.getDate() === sentAt.getDate() &&
+                today.getMonth() === sentAt.getMonth() &&
+                today.getFullYear() === sentAt.getFullYear()) {
+                return sentAt.toLocaleTimeString()
+            }
+            return sentAt.toLocaleDateString() + " " + sentAt.toLocaleTimeString()
+        }
     },
     methods: {
         deleteEmail() {
