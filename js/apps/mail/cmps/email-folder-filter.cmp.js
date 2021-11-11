@@ -10,12 +10,13 @@ export default {
         </section>
     `,
     methods: {
-        setCriteria(criteria) {
-            this.$emit('setCriteria', criteria);
+        setCriteria(status) {
+            this.$emit('setCriteria', { status, starred: false });
         },
         setStarred() {
-            this.$emit('setStarred');
+            this.$emit('setCriteria', { status: '', starred: true });
         }
+
     }
 
 }

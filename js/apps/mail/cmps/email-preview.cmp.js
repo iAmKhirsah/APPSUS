@@ -1,10 +1,11 @@
 import { emailService } from "../services/email-service.js";
+import { eventBus } from "../../../../services/event-but-service.js";
 export default {
     name: 'email-preview',
     props: ['email'],
     template: `
         <section :class="{bold : email.isRead}" class="email-preview">
-                <span :class="{starred : email.isStarred}" @click="star">&#9733;</span>
+                <span :class="{starred : email.criteria.starred}" @click="star">&#9733;</span>
                 <span class="preview-subject">{{subjectPreview}}</span>
                 <span class="preview-body">{{bodyPreview}}</span>
                 <button @click="markRead">{{markReadButton}}</button>
@@ -21,8 +22,11 @@ export default {
             emailService.save(this.email);
         },
         star() {
-            this.email.isStarred = !this.email.isStarred;
-            emailService.save(this.email);
+            this.email.criteria.starred = !this.email.criteria.starred;
+            emailService.save(this.email)
+                .then(() => {
+                    if (!this.email.criteria.starred) eventBus.$emit('starChange');
+                });
         }
     },
     computed: {

@@ -1,11 +1,12 @@
 export default {
   //   props: ['note.type'],
+  props: ['noteToEdit'],
   template: `
-       <form @submit.prevent="sendNote" class="add-note-form"> 
+       <form @submit.prevent="sendNote"> 
         <input type="text" v-model="note.info.title" placeholder="Title">
         <!-- <input v-model="note.info.txt" type="text" placeholder="Take note..."> -->
         <textarea v-model="note.info.txt" placeholder="Take note..." rows="4" cols="50"></textarea>
-        <button>Save</button>
+        <button v-show="!noteToEdit">Save</button>
        </form>`,
   data() {
     return {
@@ -18,6 +19,11 @@ export default {
         },
       },
     };
+  },
+  created() {
+    if (this.noteToEdit) {
+      this.note = this.noteToEdit;
+    }
   },
   methods: {
     sendNote() {

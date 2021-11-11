@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .notes-container {
     display: flex;
     flex-wrap: wrap;
@@ -27,3 +28,22 @@
 .add-note-form input {
     width: 100%;
 }
+=======
+.in-note-control {
+  display: flex;
+}
+
+.note .remove-note {
+  align-self: flex-end;
+}
+
+.remove-note::before {
+  font-family: fa;
+  content: '\f1f8';
+}
+
+.remove-note {
+  display: flex;
+  justify-content: flex-end;
+}
+>>>>>>> d65c4598dde12ad37798e3b0b85cd3a95b902d45

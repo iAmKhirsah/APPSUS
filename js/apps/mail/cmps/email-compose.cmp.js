@@ -25,9 +25,11 @@ export default {
     },
     methods: {
         save(status) {
-            emailService.save(emailService.createEmail(status,
-                this.email.subject,
-                this.email.body));
+            emailService.save(emailService.createEmail(this.email.subject,
+                this.email.body,
+                false,
+                this.email.to, { status, starred: false }
+            ));
             this.$emit('compose');
         },
         close() {

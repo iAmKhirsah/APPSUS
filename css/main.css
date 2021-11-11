@@ -1,7 +1,14 @@
-@import '/css/cmps/app-header.css';
-@import '/css/apps/keep/keep-app.css';
+/* @import './css/cmps/app-header.css'; */
+@import '../css/cmps/app-header.css';
+@import '../css/apps/keep/keep-app.css';
 @import './apps/mail/mail-app.css';
-* {
-    margin: 0;
-    padding: 0;
+@font-face {
+  font-family: fa;
+  src: url('../../../fonts/font-awesome.otf');
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* HELPERS */

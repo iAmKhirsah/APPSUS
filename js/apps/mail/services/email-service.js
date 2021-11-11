@@ -8,8 +8,8 @@ export const emailService = {
     getById,
     remove,
     sortBy,
-    createEmail
-
+    createEmail,
+    saveNew
 }
 const EMAILS_KEY = 'emails';
 const loggedinUser = {
@@ -27,9 +27,10 @@ const email = {
     to: 'momo@momo.com'
 }
 
-function query(criteria, isStarred) {
-    if (isStarred) return asyncStorageService.query(EMAILS_KEY).then(emails => emails.filter(email => email.isStarred === true));
-    return asyncStorageService.query(EMAILS_KEY).then(emails => emails.filter(email => email.criteria === criteria))
+
+function query(criteria) {
+    if (!criteria.starred) return asyncStorageService.query(EMAILS_KEY).then(emails => emails.filter(email => email.criteria.status === criteria.status));
+    return asyncStorageService.query(EMAILS_KEY).then(emails => emails.filter(email => email.criteria.starred));
 }
 
 function getById(emailId) {
@@ -38,6 +39,10 @@ function getById(emailId) {
 
 function save(email) {
     return asyncStorageService.put(EMAILS_KEY, email);
+}
+
+function saveNew(email) {
+    return asyncStorageService.post(EMAILS_KEY, email);
 }
 
 function remove(emailId) {
@@ -57,12 +62,12 @@ function sortBy(emails, sortBy) {
     }
 }
 
-function createEmail(criteria = 'inbox',
+function createEmail(
     subject = 'Incoming mail',
     body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam.',
     isRead = false,
     from = 'Anonymouse@mail.com',
-    isStarred = false) {
+    criteria = { status: 'inbox', starred: true }) {
     return {
         id: utilService.makeId(),
         subject,
@@ -70,8 +75,7 @@ function createEmail(criteria = 'inbox',
         isRead,
         sentAt: Date.now() + Math.random() * 100000,
         from,
-        criteria,
-        isStarred
+        criteria
     }
 }
 
@@ -79,14 +83,14 @@ function _createEmails() {
     let emails = storageService.loadFromStorage(EMAILS_KEY);
     if (!emails || !emails.length) {
         emails = [
-            createEmail('draft', 'oh-oh, your prescription is expiring', 'Writing a business email is far easier when you know how to structure it. Here are the key components your message should contain.', true, 'simple@example.com'),
-            createEmail('inbox', 'You’re missing out on points.', 'This is the crucial part of your email which defines if a person actually opens it. A good subject line informs a recipient what the email is about and why they should', false, 'very.common@example.com'),
-            createEmail('trash', '[URGENT] You’ve got ONE DAY to watch this', 'Marketing Budget Q4: Please review till August, 31', true, 'other.email-with-hyphen@example.com'),
-            createEmail('trash', 'Your 7-figure plan goes bye-bye at midnight', 'tart a formal email? At the beginning of your email, greet a person by name. Depending on the level of formality, your s', false, 'fully-qualified-domain@example.com'),
-            createEmail('draft', '[WEEKEND ONLY] Get this NOW before it’s gone', 'simple “Hi” to an official “Dear Mr./Ms./Dr./Professor…” For the most formal occasions, use a colon', false, 'example-indeed@strange-example.com'),
-            createEmail('draft', 'Mary, Earn double points today only', 'Here are some email greeting examples', false, 'admin@mailserver1'),
-            createEmail('inbox', 'Tonight only: A denim lover’s dream', 'eview your quarterly report and discuss the hiring strategy for your department. This is too much information for a single email! It’s better to send two separate', false, 'user-@example.org'),
-            createEmail('inbox', 'Don’t Open This Email', `Break your message into paragraphs and take advantage of headings and lists. Where it’s appropriate, emphasize the key information with bold or italics, just don’t overdo it. Your goal is to make your email as structured and easy to skim as possibl`, true, 'Abc.example.com'),
+            createEmail('oh-oh, your prescription is expiring', 'Writing a business email is far easier when you know how to structure it. Here are the key components your message should contain.', true, 'simple@example.com', { status: 'draft', starred: false }),
+            createEmail('You’re missing out on points.', 'This is the crucial part of your email which defines if a person actually opens it. A good subject line informs a recipient what the email is about and why they should', false, 'very.common@example.com', { status: 'inbox', starred: false }),
+            createEmail('[URGENT] You’ve got ONE DAY to watch this', 'Marketing Budget Q4: Please review till August, 31', true, 'other.email-with-hyphen@example.com', { status: 'trash', starred: false }),
+            createEmail('Your 7-figure plan goes bye-bye at midnight', 'tart a formal email? At the beginning of your email, greet a person by name. Depending on the level of formality, your s', false, 'fully-qualified-domain@example.com', { status: 'trash', starred: false }),
+            createEmail('[WEEKEND ONLY] Get this NOW before it’s gone', 'simple “Hi” to an official “Dear Mr./Ms./Dr./Professor…” For the most formal occasions, use a colon', false, 'example-indeed@strange-example.com', { status: 'draft', starred: false }),
+            createEmail('Mary, Earn double points today only', 'Here are some email greeting examples', false, 'admin@mailserver1', { status: 'draft', starred: false }),
+            createEmail('Tonight only: A denim lover’s dream', 'eview your quarterly report and discuss the hiring strategy for your department. This is too much information for a single email! It’s better to send two separate', false, 'user-@example.org', { status: 'inbox', starred: false }),
+            createEmail('Don’t Open This Email', `Break your message into paragraphs and take advantage of headings and lists. Where it’s appropriate, emphasize the key information with bold or italics, just don’t overdo it. Your goal is to make your email as structured and easy to skim as possibl`, true, 'Abc.example.com', { status: 'inbox', starred: false }),
         ]
         storageService.saveToStorage(EMAILS_KEY, emails);
     }

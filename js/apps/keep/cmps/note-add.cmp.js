@@ -11,19 +11,19 @@ export default {
     addNoteVideo,
   },
   template: `
-    <section class="note-control-container">
-            <div class="text-container">
-            <form>
-            <add-regular-note @noteTxt="saveNote" v-show="note.type === 'note-txt'"/>
-            <add-note-img @noteImg="saveNote" v-show="note.type === 'note-img'"/>
-            <add-note-todos @noteTodo="saveNote" v-show="note.type === 'note-todos'"/>
-            <add-note-video @noteVid="saveNote" v-show="note.type === 'note-vid'"/>
-            <div class="input-buttons">
-                <button @click="setNoteType('note-todos')">Todo</button>
-                <button @click="setNoteType('note-img')">Img</button>
-                <button @click="setNoteType('note-vid')">Video</button>
-            </div>
-            </form>
+    <section class="main-note-controls">
+            <div>
+              <form class="main-note-form">
+                  <add-regular-note @noteTxt="saveNote" v-show="note.type === 'note-txt'"/>
+                  <add-note-img @noteImg="saveNote" v-show="note.type === 'note-img'"/>
+                  <add-note-todos @noteTodo="saveNote" v-show="note.type === 'note-todos'"/>
+                  <add-note-video @noteVid="saveNote" v-show="note.type === 'note-vid'"/>
+                <div>
+                  <button @click="setNoteType('note-todos')">Todo</button>
+                  <button @click="setNoteType('note-img')">Img</button>
+                  <button @click="setNoteType('note-vid')">Video</button>
+                </div>
+              </form>
             </div>
     </section>`,
   data() {
@@ -32,6 +32,7 @@ export default {
       note: {
         id: null,
         type: 'note-txt',
+        color: '#e1d5d5',
       },
     };
   },
@@ -40,6 +41,7 @@ export default {
       this.note.type = type;
     },
     saveNote(note) {
+      if (!note.info.title && !note.info.txt) return;
       asyncStorageService.post('notes', note).then(() => {
         this.$emit('AddedNote');
         if ((this.note.type = 'note-txt')) return;
@@ -48,28 +50,5 @@ export default {
         }
       });
     },
-    // adjustInfo() {
-    //   if (this.note.type === 'note-todos') {
-    //     return (this.note.info = {
-    //       label: null,
-    //       todos: [(txt = null), (doneAt = Date.now())],
-    //     });
-    //   }
-    // },
-    // save() {
-    //   if (!this.note.type) this.note.type = 'note-txt';
-    //   if (!this.note.info.title) this.note.info.title = 'Untitled';
-    //   noteService.createNewNote(this.note.id, this.note.type, this.note.info);
-    // },
-    // save() {
-    //   console.log('i hit save');
-    //   if (!this.note.type) this.note.type = 'note-txt';
-    //   if (!this.note.info.title) this.note.info.title = 'Untitled';
-    //   console.log(this.note.type);
-    //   asyncStorageService.post('notes', this.note).then(() => {
-    //     this.$emit('AddedNote');
-    //     this.note.type = null;
-    //   });
-    // },
   },
 };
