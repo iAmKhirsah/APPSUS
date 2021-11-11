@@ -13,12 +13,16 @@ export default {
   template: `
     <section class="main-note-controls">
             <div>
-              <form class="main-note-form">
+              <form class="main-note-form" :style="'background-color: ' + note.style.backgroundColor">
                   <add-regular-note @noteTxt="saveNote" v-show="note.type === 'note-txt'"/>
                   <add-note-img @noteImg="saveNote" v-show="note.type === 'note-img'"/>
                   <add-note-todos @noteTodo="saveNote" v-show="note.type === 'note-todos'"/>
                   <add-note-video @noteVid="saveNote" v-show="note.type === 'note-vid'"/>
-                <div>
+                <div class="controls-container">
+                  <div class="color-container">
+                  <i class="fas fa-palette" :style="'background-color: ' + note.style.backgroundColor"></i>
+                  <input type="color" v-model="note.style.backgroundColor"/>
+                  </div>
                   <button @click="setNoteType('note-todos')">Todo</button>
                   <button @click="setNoteType('note-img')">Img</button>
                   <button @click="setNoteType('note-vid')">Video</button>
@@ -32,7 +36,9 @@ export default {
       note: {
         id: null,
         type: 'note-txt',
-        color: '#e1d5d5',
+        style: {
+          backgroundColor: '#808080',
+        },
       },
     };
   },
@@ -42,6 +48,8 @@ export default {
     },
     saveNote(note) {
       if (!note.info.title && !note.info.txt) return;
+      console.log(note);
+      note.style.backgroundColor = this.note.style.backgroundColor;
       asyncStorageService.post('notes', note).then(() => {
         this.$emit('AddedNote');
         if ((this.note.type = 'note-txt')) return;

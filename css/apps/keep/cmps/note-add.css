@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   align-items: center;
   flex-direction: column;
+  margin-top: 20px;
   flex: 1;
 }
 .main-note-form {
@@ -38,3 +39,9 @@
   color: black;
 }
 
+.controls-container {
+  display: flex;
+}
+.controls-container > * {
+  margin: 5px;
+}

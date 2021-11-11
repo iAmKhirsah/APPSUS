@@ -1,0 +1,23 @@
+*{
+  box-sizing: border-box;
+}
+.keep-header {
+  display: flex;
+  justify-content: space-between;
+  background: burlywood;
+}
+.search-bar{
+  width: 300px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+.search-bar input {
+  width: 65%;
+  border: none;
+  outline: none;
+}
+.magnifying-glass::before {
+  font-family: fa;
+  content: '\f002';
+}

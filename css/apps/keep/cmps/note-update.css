@@ -2,7 +2,6 @@
   position: absolute;
   width: 300 px;
   height: 300 px;
-  background-color: bisque;
   right: 50%;
   top: 50%;
   transform: translate(50%, -50%);

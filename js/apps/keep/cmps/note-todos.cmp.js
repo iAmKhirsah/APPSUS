@@ -6,13 +6,16 @@ export default {
       <p v-for="todo in note.info.todos">{{todo.txt}}{{todo.doneAt}}</p>
     </div>
     <div class="in-note-control">
-    <input type="color" v-model="color" @input="bgColor"/>
+    <div class="color-container">
+<input type="color"  v-model="color" @input="changeBackgroundColor"/>
+<i class="fas fa-palette" :style="'background-color: ' + note.style.backgroundColor"></i>
+</div>
       <button @click="remove(note.id)" class="remove-note"></button>
 </div>
-            </div>`,
+    </div>`,
   data() {
     return {
-      color: '#e1d5d5',
+      color: null,
     };
   },
   methods: {
@@ -22,8 +25,8 @@ export default {
     update(noteId) {
       this.$emit('update', noteId);
     },
-    bgColor() {
-      this.$emit('bgColor', this.color);
+    changeBackgroundColor() {
+      this.$emit('newBgc', this.color, this.note.id);
     },
   },
 };
