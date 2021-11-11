@@ -20,9 +20,9 @@ export default {
       },
     };
   },
-  created(){
-    if(this.noteToEdit){
-      this.note = this.noteToEdit
+  created() {
+    if (this.noteToEdit) {
+      this.note = this.noteToEdit;
     }
   },
   methods: {

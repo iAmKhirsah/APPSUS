@@ -32,6 +32,7 @@ export default {
       note: {
         id: null,
         type: 'note-txt',
+        color: '#e1d5d5',
       },
     };
   },

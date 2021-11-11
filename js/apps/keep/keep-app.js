@@ -13,13 +13,12 @@ export default {
     <section class="keep-app">
       <note-add @AddedNote="loadNotes"/>
       <notes-list :notes="notes" @remove="removeNote" @update="updateNote"/>
-      <note-update v-show="noteId" v-if="noteId" :noteId="noteId" @UpdatedNote="noteId = null"/>
+      <note-update v-show="noteId" v-if="noteId" :noteId="noteId" @UpdatedNote="noteId = null" @closeUpdate="noteId = null"/>
     </section>
     `,
   data() {
     return {
       notes: null,
-      // edit: false,
       noteId: null,
     };
   },

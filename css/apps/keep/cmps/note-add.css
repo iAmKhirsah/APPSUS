@@ -37,18 +37,4 @@
   text-decoration: none;
   color: black;
 }
-.note .remove-note {
-  align-self: flex-end;
-}
-/* .note a .note-img {
-  align-self: center;
-} */
-.remove-note::before {
-  font-family: fa;
-  content: '\f1f8';
-}
 
-.remove-note {
-  display: flex;
-  justify-content: flex-end;
-}

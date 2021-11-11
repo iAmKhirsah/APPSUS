@@ -13,14 +13,22 @@ export default {
   },
   template: `
     <div>
-        <component :note="note" :is="noteType" class="note" @remove="remove" @update="update">{{note}}</component>
+        <component :note="note" :is="noteType" class="note" @remove="remove" @update="update" :style="'background-color: ' + color" @bgColor="bgColor">{{note}}</component>
     </div>`,
+  data() {
+    return {
+      color: '#e1d5d5',
+    };
+  },
   methods: {
     remove(noteId) {
       this.$emit('remove', noteId);
     },
     update(noteId) {
       this.$emit('update', noteId);
+    },
+    bgColor(color) {
+      this.color = color;
     },
   },
   computed: {

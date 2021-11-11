@@ -13,6 +13,7 @@ export default {
   props: ['noteId'],
   template: `
     <section class="note-edit-container">
+                  <button class="close-update-screen" @click="closeEditScreen">X</button>
                   <add-regular-note @noteTxt="saveNote"  v-if="noteToEdit?.type === 'note-txt'" :noteToEdit="noteToEdit"/>
                   <add-note-img @noteImg="saveNote"  v-if="noteToEdit?.type === 'note-img'" :noteToEdit="noteToEdit"/>
                   <add-note-todos @noteTodo="saveNote"  v-if="noteToEdit?.type === 'note-todos'" :noteToEdit="noteToEdit"/>
@@ -34,6 +35,9 @@ export default {
     }
   },
   methods: {
+    closeEditScreen() {
+      this.$emit('closeUpdate');
+    },
     saveNote() {
       let note = this.noteToEdit;
       if (!note.info.title && !note.info.txt) return;
