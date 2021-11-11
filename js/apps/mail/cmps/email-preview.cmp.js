@@ -4,6 +4,7 @@ export default {
     props: ['email'],
     template: `
         <section :class="{bold : email.isRead}" class="email-preview">
+                <span :class="{starred : email.isStarred}" @click="star">&#9733;</span>
                 <span class="preview-subject">{{subjectPreview}}</span>
                 <span class="preview-body">{{bodyPreview}}</span>
                 <button @click="markRead">{{markReadButton}}</button>
@@ -17,6 +18,10 @@ export default {
     methods: {
         markRead() {
             this.email.isRead = !this.email.isRead;
+            emailService.save(this.email);
+        },
+        star() {
+            this.email.isStarred = !this.email.isStarred;
             emailService.save(this.email);
         }
     },
@@ -39,7 +44,7 @@ export default {
         },
         markReadButton() {
             return (this.email.isRead) ? 'Mark Unread' : 'Mark Read';
-        }
+        },
     },
 
 }

@@ -15,6 +15,14 @@
     border: 1px solid black;
 }
 
+.starred {
+    color: gold;
+}
+
+.star:hover {
+    color: whitesmoke;
+}
+
 
 /* email-list */
 
@@ -47,4 +55,15 @@
 
 .folder-list button:hover {
     background-color: rgb(92, 238, 92);
+}
+
+
+/* compose */
+
+.compose-email form {
+    max-width: 30%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

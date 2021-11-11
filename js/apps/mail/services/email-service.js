@@ -7,6 +7,8 @@ export const emailService = {
     save,
     getById,
     remove,
+    sortBy,
+    createEmail
 
 }
 const EMAILS_KEY = 'emails';
@@ -25,7 +27,8 @@ const email = {
     to: 'momo@momo.com'
 }
 
-function query(criteria) {
+function query(criteria, isStarred) {
+    if (isStarred) return asyncStorageService.query(EMAILS_KEY).then(emails => emails.filter(email => email.isStarred === true));
     return asyncStorageService.query(EMAILS_KEY).then(emails => emails.filter(email => email.criteria === criteria))
 }
 
@@ -42,8 +45,15 @@ function remove(emailId) {
 }
 
 function sortBy(emails, sortBy) {
-    if (sortBy === 'title') {
-        return emails.sort(function(a, b) { return a.title.localeCompare(b.title) });
+    switch (sortBy) {
+        case 'new':
+            return emails.sort(function(a, b) { return a.sentAt - b.sentAt });
+        case 'old':
+            return emails.sort(function(a, b) { return b.sentAt - a.sentAt });
+        case 'subject':
+            return emails.sort(function(a, b) { return a.subject.localeCompare(b.subject) })
+        default:
+            return emails;
     }
 }
 
@@ -51,15 +61,17 @@ function createEmail(criteria = 'inbox',
     subject = 'Incoming mail',
     body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam.',
     isRead = false,
-    from = 'Anonymouse@mail.com', ) {
+    from = 'Anonymouse@mail.com',
+    isStarred = false) {
     return {
         id: utilService.makeId(),
         subject,
         body,
         isRead,
-        sentAt: Date.now(),
+        sentAt: Date.now() + Math.random() * 100000,
         from,
-        criteria
+        criteria,
+        isStarred
     }
 }
 
