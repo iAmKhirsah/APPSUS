@@ -1,12 +1,13 @@
-*{
+* {
   box-sizing: border-box;
 }
 .keep-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   background: burlywood;
 }
-.search-bar{
+.search-bar {
+  margin-inline-start: 40px;
   width: 300px;
   background-color: white;
   border-radius: 5px;

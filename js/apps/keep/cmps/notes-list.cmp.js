@@ -1,5 +1,4 @@
 import keepPreview from './keep-preview.cmp.js';
-
 export default {
   props: ['notes'],
   components: {
@@ -8,10 +7,20 @@ export default {
   template: `
     <section class="note-container">
         <div v-for="note in notes" :key="note.id">
-          <keep-preview :note="note" @remove="remove" @update="update" @newBgc="newBgc"/>
+          <keep-preview :note="note" @remove="remove" @update="update" @newBgc="newBgc" @pinned="sortPinned" @duplicate="duplicate"/>
         </div>
     </section>`,
   methods: {
+    duplicate(note) {
+      this.$emit('duplicate', note);
+    },
+    sortPinned(note) {
+      // this.$emit('toSort', this.notes);
+      this.$emit('toSort', this.notes, note);
+    },
+    sendToSave() {
+      this.$emit('toSave', this.notes);
+    },
     remove(noteId) {
       this.$emit('remove', noteId);
     },

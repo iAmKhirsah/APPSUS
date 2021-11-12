@@ -15,7 +15,7 @@ export default {
     <section class="keep-app">
       <keep-app-header @filtered="filtered"/>
       <note-add @AddedNote="loadNotes"/>
-      <notes-list :notes="notesToShow" @remove="removeNote" @update="updateNote" @newBgc="newBgc"/>
+      <notes-list :notes="notesToShow" @remove="removeNote" @update="updateNote" @newBgc="newBgc" @toSort="toSort" @duplicate="duplicate"/>
       <note-update v-show="noteId" v-if="noteId" :noteId="noteId" @UpdatedNote="finalizeUpdate" @closeUpdate="noteId = null"/>
     </section>
     `,
@@ -30,6 +30,18 @@ export default {
     this.loadNotes();
   },
   methods: {
+    duplicate(note) {
+      noteService.toPost('notes', note).then(() => {
+        this.loadNotes();
+      });
+    },
+    toSort(notes, note) {
+      if (note) {
+        noteService.toPut('notes', note);
+      }
+      if (!notes) notes = this.notes;
+      return noteService.sortedPins(notes);
+    },
     filtered(filterBy) {
       this.filterBy = filterBy;
     },
@@ -38,54 +50,36 @@ export default {
       this.loadNotes();
     },
     loadNotes() {
-      noteService.query().then((notes) => {
-        this.notes = notes;
-      });
+      noteService
+        .query()
+        .then((notes) => {
+          this.notes = notes;
+        })
+        .then(() => {
+          this.toSort();
+        });
     },
     updateNote(id) {
       this.noteId = id;
     },
     removeNote(id) {
-      asyncStorageService.remove('notes', id).then(() => {
+      noteService.toRemove('notes', id).then(() => {
         this.loadNotes();
       });
     },
     newBgc(color, id) {
-      asyncStorageService.get('notes', id).then((note) => {
-        note.style.backgroundColor = color;
-        asyncStorageService.put('notes', note).then(() => {
-          this.loadNotes();
-        });
+      noteService.applyColor('notes', id, color).then(() => {
+        this.loadNotes();
       });
     },
   },
   computed: {
     notesToShow() {
-      console.log(this.filterBy);
-      if (!this.filterBy.type && !this.filterBy.title) return this.notes;
-      const type = this.filterBy.type;
-      const searchStr = this.filterBy.title.toLowerCase();
-      if (!this.filterBy.title && this.filterBy.type) {
-        const notesToShow = this.notes.filter((note) => {
-          return note.type.includes(type);
-        });
-        return notesToShow;
-      } else if (!this.filterBy.type && this.filterBy.title) {
-        const notesToShow = this.notes.filter((note) => {
-          if (!note.info.title) return;
-          return note.info.title.toLowerCase().includes(searchStr);
-        });
-        return notesToShow;
-      } else {
-        const notesToShow = this.notes.filter((note) => {
-          if (!note.info.title) return;
-          return (
-            note.info.title.toLowerCase().includes(searchStr) &&
-            note.type.includes(type)
-          );
-        });
-        return notesToShow;
-      }
+      return noteService.filter(
+        this.filterBy.type,
+        this.filterBy.title,
+        this.notes
+      );
     },
   },
 };

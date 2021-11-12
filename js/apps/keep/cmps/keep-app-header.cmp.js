@@ -10,10 +10,6 @@ export default {
        <div class="search-bar">
         <keep-app-filter @filtered="filtered"/>
        </div>
-        <nav>
-            <router-link to="/">Home </router-link>
-            <router-link to="/mail">Mail </router-link>
-        </nav>
    </section>`,
   methods: {
     filtered(filterBy) {

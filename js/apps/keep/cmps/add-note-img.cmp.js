@@ -1,8 +1,8 @@
 export default {
-  props: ['noteToEdit'],
+  props: ['noteToEdit', 'processedImg'],
   template: `
          <form @submit.prevent="sendNote"> 
-          <img v-if="note.info.url" :src="note.info.url" width="150px" height="150px"/>
+          <img v-if="note.info.url" :src="note.info.url"/>
           <input v-model="note.info.title" type="text" placeholder="Title">
           <textarea v-model="note.info.txt" placeholder="Take note..." rows="4" cols="50"></textarea>
           <input @change="uploadImage" type="file" accept="image/*" />
@@ -14,6 +14,7 @@ export default {
       note: {
         id: null,
         type: 'note-img',
+        isPinned: false,
         info: {
           url: null,
           txt: null,
@@ -35,6 +36,7 @@ export default {
       this.note.info.url = null;
     },
     uploadImage(e) {
+      this.$emit('imgToProcess', e);
       const image = e.target.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(image);

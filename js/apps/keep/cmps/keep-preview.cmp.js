@@ -13,12 +13,18 @@ export default {
   },
   template: `
     <div>
-      <component :note="note" :is="noteType" class="note" @remove="remove" @update="update" @newBgc="newBgc" :style="'background-color: ' + note.style.backgroundColor">{{note}}</component>
+      <component :note="note" :is="noteType" class="note" @remove="remove" @update="update" @pinned="pinned" @newBgc="newBgc" @duplicate="duplicate" :style="'background-color: ' + note.style.backgroundColor">{{note}}</component>
     </div>`,
   data() {
     return {};
   },
   methods: {
+    duplicate(note) {
+      this.$emit('duplicate', note);
+    },
+    pinned(note) {
+      this.$emit('pinned', note);
+    },
     remove(noteId) {
       this.$emit('remove', noteId);
     },
@@ -38,4 +44,3 @@ export default {
     },
   },
 };
-

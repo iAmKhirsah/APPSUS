@@ -1,0 +1,102 @@
+/* NOTE */
+.note {
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  min-height: 50px;
+  border-radius: 5px;
+  padding: 5px;
+  overflow-wrap: break-word;
+}
+
+.note img {
+  width: 100%;
+  height: 150px;
+}
+.note iframe {
+  width: 100%;
+  height: 200px;
+}
+.note a {
+  text-decoration: none;
+  color: black;
+}
+
+.in-note-control {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.in-note-control > * {
+  margin: 5px;
+}
+
+.remove-note,
+.pin-note,
+.duplicate {
+  background-color: transparent;
+  align-self: flex-end;
+  border: none;
+  cursor: pointer;
+}
+
+.remove-note:hover {
+  color: red;
+}
+.pin-note:hover,
+.duplicate:hover {
+  color: gold;
+}
+
+.remove-note::before {
+  font-family: fa;
+  content: '\f1f8';
+}
+
+.remove-note {
+  display: flex;
+  justify-content: flex-end;
+}
+.pin-note::before {
+  font-family: fa;
+  content: '\f08d';
+}
+.duplicate::before {
+  font-family: fa;
+  content: '\f24d';
+}
+
+.color-container {
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+  position: relative;
+}
+.color-container input {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.color-container:hover {
+  color: gold;
+}
+.color-container i {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.color-container i::before {
+  font-size: 16px;
+}
+
+/* HELPERS */
+.clicked {
+  color: brown;
+}

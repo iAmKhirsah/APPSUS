@@ -1,4 +1,5 @@
 import { asyncStorageService } from '../../../../services/async-storage-service.js';
+import { noteService } from '../services/note.service.js';
 import addRegularNote from './add-regular-note.cmp.js';
 import addNoteImg from './add-note-img.cmp.js';
 import addNoteTodos from './add-note-todos.cmp.js';
@@ -15,14 +16,15 @@ export default {
             <div>
               <form class="main-note-form" @focus="hideControls" :style="'background-color: ' + note.style.backgroundColor">
                   <add-regular-note @noteTxt="saveNote" v-show="note.type === 'note-txt'"/>
-                  <add-note-img @noteImg="saveNote" v-show="note.type === 'note-img'"/>
+                  <add-note-img :processedImg="processedImg" @imgToProcess="imgToProcess" @noteImg="saveNote" v-show="note.type === 'note-img'"/>
                   <add-note-todos @noteTodo="saveNote" v-show="note.type === 'note-todos'"/>
-                  <add-note-video @noteVid="saveNote" v-show="note.type === 'note-vid'"/>
+                  <add-note-video :processedUrl="processedUrl" @urlProcess="urlProcess" @noteVid="saveNote" v-show="note.type === 'note-vid'"/>
                 <div class="controls-container" v-show="controls">
                   <div class="color-container">
                   <i class="fas fa-palette" :style="'background-color: ' + note.style.backgroundColor"></i>
                   <input type="color" v-model="note.style.backgroundColor"/>
                   </div>
+                  <button @click="setNoteType('note-txt')">Note</button>
                   <button @click="setNoteType('note-todos')">Todo</button>
                   <button @click="setNoteType('note-img')">Img</button>
                   <button @click="setNoteType('note-vid')">Video</button>
@@ -34,6 +36,8 @@ export default {
     return {
       fullInput: false,
       controls: true,
+      processedImg: null,
+      processedUrl: null,
       note: {
         id: null,
         type: 'note-txt',
@@ -44,6 +48,13 @@ export default {
     };
   },
   methods: {
+    urlProcess(url) {
+      this.processedUrl = noteService.processUrl(url);
+    },
+    imgToProcess(e) {
+      // this.processedImg = noteService.processImg(e);
+      // console.log(this.processedImg);
+    },
     hideControls() {
       this.controls = !this.controls;
     },
@@ -51,11 +62,9 @@ export default {
       this.note.type = type;
     },
     saveNote(note) {
-      // if (!note.info.title && !note.info.txt) return;
       if (!note.info.title) note.info.title = '';
-      console.log(note);
       note.style.backgroundColor = this.note.style.backgroundColor;
-      asyncStorageService.post('notes', note).then(() => {
+      noteService.toPost('notes', note).then(() => {
         this.$emit('AddedNote');
         if ((this.note.type = 'note-txt')) return;
         else {

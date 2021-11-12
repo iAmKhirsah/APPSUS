@@ -1,12 +1,12 @@
 export default {
-  props: ['noteToEdit'],
+  props: ['noteToEdit', 'processedUrl'],
   template: `
          <form @submit.prevent="sendNote"> 
-         <iframe v-if="note.info.url" width="150" height="150"
-            :src="note.info.url">
+         <iframe 
+            :src="processedUrl">
           </iframe>
           <input type="text" v-model="note.info.title" placeholder="Title">
-          <input type="text" v-model="note.info.url" @input="processLink" placeholder="Youtube Url...">
+          <input type="text" v-model="note.info.url" @input="sendToProcess" placeholder="Youtube Url...">
           <textarea v-model="note.info.txt" placeholder="Take note..." rows="4" cols="50"></textarea>
           <button v-show="!noteToEdit">Save</button>
          </form>`,
@@ -15,6 +15,7 @@ export default {
       note: {
         id: null,
         type: 'note-vid',
+        isPinned: false,
         info: {
           url: null,
           title: null,
@@ -32,18 +33,20 @@ export default {
     }
   },
   methods: {
-    processLink() {
+    sendToProcess() {
       let url = this.note.info.url;
-      const regExp =
-        /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-      const match = url.match(regExp);
-
-      this.note.info.url = `//www.youtube.com/embed/${
-        match && match[2].length === 11 ? match[2] : null
-      }`;
+      this.$emit('urlProcess', url);
+    },
+    setUrl(url) {
+      this.note.info.url = url;
     },
     sendNote() {
       this.$emit('noteVid', this.note);
+    },
+  },
+  watch: {
+    processedUrl: function (newVal, oldVal) {
+      this.setUrl(newVal);
     },
   },
 };

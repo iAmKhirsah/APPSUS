@@ -3,6 +3,7 @@ import addRegularNote from './add-regular-note.cmp.js';
 import addNoteImg from './add-note-img.cmp.js';
 import addNoteTodos from './add-note-todos.cmp.js';
 import addNoteVideo from './add-note-video.cmp.js';
+import { noteService } from '../services/note.service.js';
 export default {
   components: {
     addRegularNote,
@@ -47,7 +48,7 @@ export default {
     saveNote() {
       let note = this.noteToEdit;
       if (!note.info.title && !note.info.txt) return;
-      asyncStorageService.put('notes', note).then(() => {
+      noteService.toPut('notes', note).then(() => {
         this.$emit('UpdatedNote');
         this.noteToEdit = null;
       });

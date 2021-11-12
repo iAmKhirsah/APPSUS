@@ -13,6 +13,7 @@ export default {
       note: {
         id: null,
         type: 'note-txt',
+        isPinned: false,
         info: {
           txt: null,
           title: null,
