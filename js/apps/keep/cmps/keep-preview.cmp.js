@@ -12,7 +12,7 @@ export default {
     noteVid,
   },
   template: `
-    <div>
+    <div class="flex-height-fit">
       <component :note="note" :is="noteType" class="note" @remove="remove" @update="update" @pinned="pinned" @newBgc="newBgc" @duplicate="duplicate" :style="'background-color: ' + note.style.backgroundColor">{{note}}</component>
     </div>`,
   data() {

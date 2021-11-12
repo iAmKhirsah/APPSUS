@@ -12,13 +12,17 @@
   box-sizing: border-box;
 }
 
+/* HELPERS */
+.flex-height-fit {
+  display: flex;
+  height: fit-content;
+}
+/* TEMP SHOULD NOT BE HERE */
 ul li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* HELPERS */
-/* TEMP SHOULD NOT BE HERE */
 .edit-text-todo {
   width: 200px;
   height: fit-content;
