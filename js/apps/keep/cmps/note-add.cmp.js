@@ -25,8 +25,13 @@ export default {
                   <label for="img-input" class="img-icon" @click="setNoteType('note-img'); expandImgSearch()"></label>
                   <input id="img-input" @change="uploadImage" type="file" accept="image/*" />
                   </div>
-                <div class="controls-container" v-show="controls">
+                <!-- <div class="controls-container" v-show="controls">
                   <div class="color-container">
+                  <input type="color" v-model="note.style.backgroundColor"/>
+                  <i class="fas fa-palette star" :style="'background-color: ' + note.style.backgroundColor"></i>
+                </div> -->
+                <div class="controls-container" v-show="controls">
+                  <div class="main-color-container">
                   <input type="color" v-model="note.style.backgroundColor"/>
                   <i class="fas fa-palette star" :style="'background-color: ' + note.style.backgroundColor"></i>
                 </div>

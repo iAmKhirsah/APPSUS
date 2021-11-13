@@ -23,6 +23,7 @@ textarea {
   border: none;
   outline: none;
   color: black;
+  background-color: transparent;
   font-size: 1.2rem;
   padding: 10px;
 }
@@ -125,20 +126,33 @@ textarea {
   width: 15px;
   margin: 8px;
 }
-.controls-container .color-container{
+
+.main-color-container {
   width: 24px;
   height: 24px;
   background-color: transparent;
   position: relative;
 }
-.controls-container .color-container i {
-  font-size: 1.5rem;
-
+.main-color-container input {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  color: transparent;
+  border: 0;
+  cursor: pointer;
 }
-.controls-container .color-container input {
-  height: 23.75px;
-  width: 24px;
-  color: black;
+.main-color-container:hover {
+  color: gold;
+}
+.main-color-container i {
+  background-color: white;
+  position: absolute;
+  font-size: 1.5rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 /* NOTE-IMG-ADD */
