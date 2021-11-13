@@ -1,8 +1,8 @@
-import { asyncStorageService } from '../../../../services/async-storage-service.js';
 import addRegularNote from './add-regular-note.cmp.js';
 import addNoteImg from './add-note-img.cmp.js';
 import addNoteTodos from './add-note-todos.cmp.js';
 import addNoteVideo from './add-note-video.cmp.js';
+import { noteService } from '../services/note.service.js';
 export default {
   components: {
     addRegularNote,
@@ -33,11 +33,8 @@ export default {
   },
   created() {
     var id = this.noteId;
-    console.log(id);
     if (id) {
-      asyncStorageService
-        .get('notes', id)
-        .then((note) => (this.noteToEdit = note));
+      noteService.toGet('notes', id).then((note) => (this.noteToEdit = note));
     }
   },
   methods: {
@@ -46,8 +43,8 @@ export default {
     },
     saveNote() {
       let note = this.noteToEdit;
-      if (!note.info.title && !note.info.txt) return;
-      asyncStorageService.put('notes', note).then(() => {
+      // if (!note.info.title && !note.info.txt) return;
+      noteService.toPut('notes', note).then(() => {
         this.$emit('UpdatedNote');
         this.noteToEdit = null;
       });

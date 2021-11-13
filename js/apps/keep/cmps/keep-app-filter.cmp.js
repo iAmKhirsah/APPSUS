@@ -1,15 +1,15 @@
 export default {
-    template: `
-    <section @click="showFeatures" @blur="closeFeatures">
+  template: `
+    <section :class="['filter-container',activeSearch]">
             <span class="magnifying-glass"></span>
-            <input v-model="filterBy.title"  @input="filter" type="search" placeholder="Search...">
-            <select v-model="filterBy.type" v-if="clicked" @change="filter" class="type-select">
-            <option value="">All</option>
-            <option value="note-txt">Txt</option>
-            <option value="note-todos">Todos</option>
-            <option value="note-img">Img</option>
-            <option value="note-vid">Video</option>
-    </select>
+            <input v-model="filterBy.title" @mousedown="showFeatures" @input="filter" type="search" placeholder="Search..." :class="['filter-search', activeSearch]">
+            <select v-model="filterBy.type" v-if="clicked"  @change="filter">
+              <option value="">All</option>
+              <option value="note-txt">Txt</option>
+              <option value="note-todos">Todos</option>
+              <option value="note-img">Img</option>
+              <option value="note-vid">Video</option>
+            </select>
     </section>`,
   data() {
     return {
@@ -29,6 +29,11 @@ export default {
     },
     filter() {
       this.$emit('filtered', JSON.parse(JSON.stringify(this.filterBy)));
+    },
+  },
+  computed: {
+    activeSearch() {
+      return {'active-search' :  this.clicked}
     },
   },
 };
