@@ -14,6 +14,7 @@ export default {
 <input type="color" v-model="color" @input="changeBackgroundColor"/>
 <i class="fas fa-palette" :style="'background-color: ' + note.style.backgroundColor"></i>
 </div> -->
+    <button class="mail-send-icon" @click="sendToMail"></button>
     <button @click="duplicateNote" class="duplicate"></button>
     <button @click="remove(note.id)" class="remove-note"></button>
 </div>
@@ -25,6 +26,9 @@ export default {
     };
   },
   methods: {
+    sendToMail() {
+      this.$emit('sendMail', this.note);
+    },
     setHover(val) {
       this.toHover = val;
     },

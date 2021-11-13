@@ -14,7 +14,7 @@ export default {
           <!-- <div div div class="color-container">
               <i class="palette fas fa-palette" :style="'background-color: ' + note.style.backgroundColor"></i>
           </div> -->
-      <router-link to="/mail/" @click.native="sendToMail">SendMail</router-link>
+      <button class="mail-send-icon" @click="sendToMail"></button>
       <button @click="duplicateNote" class="duplicate"></button>
       <button @click="remove(note.id)" class="remove-note"></button>
     </div>
