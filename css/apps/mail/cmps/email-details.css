@@ -9,6 +9,11 @@
     font-family: Arial;
 }
 
+.email-details p {
+    word-wrap: break-word;
+    max-width: 50rem;
+}
+
 .email-details>*:not(:last-child) {
     border-block-end: 1px solid rgb(226, 226, 226);
 }

@@ -29,23 +29,13 @@ export default {
             isSaveDraft: false
         }
     },
-    // mounted() {
-    //     eventBus.$on('noteToMail', (note) => {
-    //         console.log('note', note);
-    //         console.log('note-title', note.title);
-    //         console.log('note-txt', note.txt);
-    //         setTimeout(() => {
-    //             this.email.body = 'qwd'
-    //             console.log('email', this.email.body);
-    //         }, 3000);
-    //         this.$nextTick(() => {
-    //             this.setBody('asd')
-    //         });
-    //         // console.log('email', this.email.body);
-    //     });
+    mounted() {
+        if (this.incomingNote) {
+            if (this.incomingNote.info.title) this.email.subject = this.incomingNote.info.title;
+            if (this.incomingNote.info.txt) this.email.body = this.incomingNote.info.txt;
+        }
 
-
-    // },
+    },
 
     methods: {
         setBody(body) {
@@ -71,12 +61,9 @@ export default {
         }
     },
     watch: {
-        incomingNote(newVal, oldVal) {
+        incomingNote: function(val) {
+            console.log(newVal)
 
-            if (newVal) {
-                console.log(newVal)
-                this.setBody(newVal);
-            }
         }
     },
 }

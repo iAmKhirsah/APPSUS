@@ -48,3 +48,34 @@
 .unread-count {
     margin-inline-end: 5rem;
 }
+
+@media (max-width: 1250px) {
+    .top-bar .logo {
+        margin-inline-end: 30px;
+    }
+    .sorting * {
+        margin-inline-end: 0.5rem;
+    }
+    .read-filter {
+        margin-inline-end: 1rem;
+    }
+    .unread-count {
+        margin-inline-end: 1rem;
+    }
+    .search-input {
+        width: 30%;
+        margin-inline-end: 2rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .burgerMenu {
+        font-size: 30px;
+        color: rgb(20, 14, 14);
+        margin-inline-start: 20px;
+        margin-inline-end: 20px;
+    }
+    .search-input {
+        width: 100%;
+    }
+}

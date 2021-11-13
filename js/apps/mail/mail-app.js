@@ -8,11 +8,11 @@ export default {
     name: 'email-app',
     template: `
         <section v-if="emails" class="email-app">
-            <top-bar :emails="emailsToShow" @setCriteria="setCriteria" @filtered="setFilter" @sortBy="sortBy" @compose="isCompose = !isCompose"/>
-            <side-bar @setCriteria="setCriteria" @compose="isCompose = !isCompose"/>
+            <top-bar :burgerMenu="burgerMenu" :emails="emailsToShow" @setCriteria="setCriteria" @filtered="setFilter" @sortBy="sortBy" @compose="isCompose = !isCompose"/>
+            <side-bar :burgerMenu="burgerMenu" @setCriteria="setCriteria" @compose="isCompose = !isCompose"/>
             <email-list v-if="!this.$route.params.emailId" :emails="emailsToShow"/>
             <router-view v-else class="email-list"></router-view>
-            <div v-if="isCompose" class="compose-background" @click="isCompose = !isCompose"></div>
+            <div v-if="isCompose" class="black-background" @click="closeModals"></div>
             <email-compose v-if="isCompose" :incomingNote="incomingNote" @compose="isCompose = !isCompose"/>
         </section>
         <section v-else>Loading</section>
@@ -23,7 +23,8 @@ export default {
             filterBy: { isRead: false, search: '' },
             criteria: { status: 'inbox', starred: false },
             isCompose: false,
-            incomingNote: 'hello',
+            incomingNote: null,
+            burgerMenu: false,
         }
     },
     created() {
@@ -39,12 +40,20 @@ export default {
         eventBus.$on('noteToMail', (note) => {
             this.incomingNote = note;
         });
+        window.addEventListener('resize', this.windowSizeHandler);
 
     },
     watch: {
         '$route.params.id': {
             handler() {
-                console.log(this.$route.query)
+                if (this.$route.query.id) {
+                    const id = this.$route.query.id;
+                    emailService.getNoteToMail()
+                        .then(notes => {
+                            this.incomingNote = notes.find(note => note.id === id);
+                            this.isCompose = !this.isCompose;
+                        });
+                }
             },
             immediate: true
         }
@@ -74,7 +83,15 @@ export default {
         },
         sortBy(sortBy) {
             this.emails = emailService.sortBy(this.emails, sortBy);
-        }
+        },
+        windowSizeHandler(e) {
+            if (window.innerWidth < 860) {
+                this.burgerMenu = true;
+            } else this.burgerMenu = false;
+        },
+        closeModals() {
+            if (this.isCompose) this.isCompose = false;
+        },
     },
     computed: {
         emailsToShow() {

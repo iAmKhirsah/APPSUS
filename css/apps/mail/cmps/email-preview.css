@@ -11,10 +11,15 @@ a {
     padding: 4px;
     border-bottom: 1px solid rgb(211, 211, 211);
     display: grid;
-    grid-template-columns: min-content 160px 150px minmax(0, 500px) min-content min-content;
+    grid-template-columns: min-content 160px 180px minmax(0, 500px) min-content min-content;
     gap: 70px;
     align-items: center;
 }
+
+
+/* .email-preview *:not(:last-child) {
+    margin-inline-end: 100px;
+} */
 
 .email-preview:hover {
     z-index: 1;
@@ -28,4 +33,14 @@ a {
 .star:hover {
     background-color: rgb(212, 212, 212);
     border-radius: 50%;
+}
+
+@media (max-width: 1250px) {
+    html {
+        font-size: 14px;
+    }
+    .email-preview {
+        grid-template-columns: min-content auto auto minmax(0, 500px) min-content min-content;
+        gap: 40px
+    }
 }

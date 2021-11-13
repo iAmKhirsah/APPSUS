@@ -9,7 +9,8 @@ export const emailService = {
     remove,
     sortBy,
     createEmail,
-    saveNew
+    saveNew,
+    getNoteToMail
 }
 const EMAILS_KEY = 'emails';
 const loggedinUser = {
@@ -31,6 +32,10 @@ const email = {
 function query(criteria) {
     if (!criteria.starred) return asyncStorageService.query(EMAILS_KEY).then(emails => emails.filter(email => email.criteria.status === criteria.status));
     return asyncStorageService.query(EMAILS_KEY).then(emails => emails.filter(email => email.criteria.starred));
+}
+
+function getNoteToMail() {
+    return asyncStorageService.query('notes');
 }
 
 function getById(emailId) {

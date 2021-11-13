@@ -16,6 +16,9 @@ export default {
     data() {
         return {}
     },
+    // created() {
+    //     window.addEventListener('resize', this.windowSizeHandler);
+    // },
     methods: {
         markRead() {
             this.email.isRead = !this.email.isRead;
@@ -27,7 +30,12 @@ export default {
                 .then(() => {
                     if (!this.email.criteria.starred) eventBus.$emit('starChange');
                 });
-        }
+        },
+        // windowSizeHandler(e) {
+        //     if (window.innerWidth < 1250) {
+
+        //     }
+        // }
     },
     computed: {
         toPreview() {
