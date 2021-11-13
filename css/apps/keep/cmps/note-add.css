@@ -116,6 +116,14 @@ textarea {
 .controls-container > * {
   margin: 10px;
 }
+.todo-div{
+  display: flex;
+  align-items: center;
+}
+.todo-div input[type="checkbox"]{
+  width: 15px;
+  margin: 8px;
+}
 /* .controls-container .color-container i {
   height: 23.75px;
   width: 24px;

@@ -34,7 +34,7 @@ export default {
       eventBus.$emit('noteToMail', note.info);
       console.log(note);
       this.$nextTick(() => {
-        this.$router.push('/mail/');
+        this.$router.push('/mail/noteToMail');
       });
     },
     duplicate(note) {
