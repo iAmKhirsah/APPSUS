@@ -1,11 +1,12 @@
+import { eventBus } from "../../../../services/event-bus-service.js";
 import { emailService } from "../services/email-service.js";
-
 export default {
     name: 'email-compose',
+    props: ['incomingNote'],
     template: `
         <section class="compose-email">
             <form @submit.prevent="save('sent')">
-                <h1>Compose New Email : </h1>
+                <h1>Compose new mail : </h1>
                 <input type="email" v-model="email.to" placeholder="To" required autofocus/>
                 <input type="text" v-model="email.subject" placeholder="Subject" required/>
                 <textarea cols="30" rows="10" v-model="email.body" placeholder="Compose email" required></textarea>
@@ -28,7 +29,18 @@ export default {
             isSaveDraft: false
         }
     },
+    mounted() {
+        if (this.incomingNote) {
+            if (this.incomingNote.info.title) this.email.subject = this.incomingNote.info.title;
+            if (this.incomingNote.info.txt) this.email.body = this.incomingNote.info.txt;
+        }
+
+    },
+
     methods: {
+        setBody(body) {
+            this.email.body = body;
+        },
         save(status) {
             if (!this.email.subject && !this.email.to && !this.email.body) {
                 this.isSaveDraft = true;
@@ -47,5 +59,11 @@ export default {
         close() {
             this.$emit('compose');
         }
-    }
+    },
+    watch: {
+        incomingNote: function(val) {
+            console.log(newVal)
+
+        }
+    },
 }

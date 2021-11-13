@@ -137,17 +137,6 @@ export default {
           eventBus.$emit('showMsg', msg);
         });
     },
-    //   newBgc(color, note) {
-    //     // console.log('hello');
-    //     // noteService.toGet('notes', id).then((note) => {
-    //     // console.log(note);
-    //     // note.style.backgroundColor = color;
-    //     // });
-    //     // noteService.applyColor('notes', id, color).then(() => {
-    //     //   console.log('hello');
-    //     // this.loadNotes();
-    //     // });
-    //   },
   },
   computed: {
     notesToShow() {

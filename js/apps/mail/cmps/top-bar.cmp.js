@@ -1,20 +1,22 @@
 import { eventBus } from "../../../../services/event-bus-service.js";
 export default {
     name: 'email-filter',
-    props: ['emails'],
+    props: ['emails', 'burgerMenu'],
     template: `
         <section class="top-bar">
-            <div @click="goHome" class="logo">
+            <div v-if="burgerMenu" class="burgerMenu" @click="toggleSideBar"><i class="fas fa-bars"></i></div>
+            <div v-if="!burgerMenu" @click="goHome" class="logo">
                 <img src="./img/logo.png"/>
                 <span>Gmail</span>
             </div>
             <input v-if="!isDetails" class='search-input' id="search-filter" type="text" v-model="filterBy.search" @input="filter" placeholder="Search mail"/>
-            <label v-if="!isDetails" class='read-filter' for="read-filter">
+            
+            <label v-if="!isDetails && !burgerMenu" class='read-filter' for="read-filter">
                 Read only
                 <input id="read-filter" type="checkbox" v-model="filterBy.read" @change="filter"/>
             </label>
-            <span  v-if="!isDetails" class="unread-count">Unread count : {{unreadCount}}</span>
-            <section  v-if="!isDetails" class="sorting">
+            <span  v-if="!isDetails && !burgerMenu" class="unread-count">Unread count : {{unreadCount}}</span>
+            <section  v-if="!isDetails && !burgerMenu" class="sorting">
                 <span>Sort By : </span>
                 <label for="new">new
                     <input type="radio" name="sorting" value="new" id="new" v-model="sortBy" @change="selected"> 
@@ -57,6 +59,9 @@ export default {
         goHome() {
             if (!this.$route.path.includes('inbox')) this.$router.push({ path: 'inbox' });
             this.$emit('setCriteria', { status: 'inbox', starred: false });
+        },
+        toggleSideBar() {
+            eventBus.$emit('toggleBar');
         }
     }
 }

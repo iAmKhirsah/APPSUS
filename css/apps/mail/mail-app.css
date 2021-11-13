@@ -26,3 +26,20 @@
     grid-column-start: 2;
     grid-row-start: 2;
 }
+
+@media (max-width: 1250px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 860px) {
+    html {
+        font-size: 12px;
+    }
+    .email-list {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 2;
+    }
+}
