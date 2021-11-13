@@ -1,4 +1,5 @@
 import { noteService } from '../services/note.service.js';
+import { eventBus } from '../../../../services/event-bus-service.js';
 import addRegularNote from './add-regular-note.cmp.js';
 import addNoteImg from './add-note-img.cmp.js';
 import addNoteTodos from './add-note-todos.cmp.js';
@@ -14,7 +15,7 @@ export default {
     <section class="main-note-controls">
             <div class="main-note-subcontainer">
               <form class="main-note-form" :class="border" @focus="hideControls" :style="'background-color: ' + note.style.backgroundColor">
-                  <add-regular-note @noteTxt="saveNote" v-show="note.type === 'note-txt'" :focusOnTxt="focusOnTxt" :toSave="toSave"/>
+                  <add-regular-note @noteTxt="saveNote" @emailNote="emailNote" v-show="note.type === 'note-txt'" :focusOnTxt="focusOnTxt" :toSave="toSave"/>
                   <add-note-img :processedImg="processedImg" @noteImg="saveNote" v-show="note.type === 'note-img'" :toSave="toSave"/>
                   <add-note-todos @noteTodo="saveNote" v-show="note.type === 'note-todos'" :toSave="toSave"/>
                   <add-note-video :processedUrl="processedUrl" @urlProcess="urlProcess" @noteVid="saveNote" v-show="note.type === 'note-vid'" :toSave="toSave"/>
@@ -48,6 +49,7 @@ export default {
       focusOnTxt: false,
       processedImg: null,
       processedUrl: null,
+      emailNote: null,
       note: {
         id: null,
         type: null,
@@ -56,6 +58,12 @@ export default {
         },
       },
     };
+  },
+  created() {
+    eventBus.$on('emailToNote', (email) => {
+      console.log(email);
+      this.emailNote = email
+    });
   },
   methods: {
     /// TODO TRY TO PUT THIS INTO NOTE SERVICEEEEE

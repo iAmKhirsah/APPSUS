@@ -1,5 +1,5 @@
 import { emailService } from "../services/email-service.js";
-import { eventBus } from "../../../../services/event-but-service.js";
+import { eventBus } from "../../../../services/event-bus-service.js";
 export default {
     name: 'email-preview',
     props: ['email'],

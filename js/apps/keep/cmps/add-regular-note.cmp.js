@@ -1,6 +1,6 @@
 export default {
   //   props: ['note.type'],
-  props: ['noteToEdit', 'focusOnTxt', 'toSave'],
+  props: ['noteToEdit', 'focusOnTxt', 'toSave', 'emailNote'],
   template: `
        <form @submit.prevent="sendNote"> 
         <input type="text" v-model="note.info.title" placeholder="Title">
@@ -28,6 +28,9 @@ export default {
     if (this.noteToEdit) {
       this.note = this.noteToEdit;
     }
+    // if(this.emailNote){
+    //   console.log(this.emailNote);
+    // }
   },
   methods: {
     sendNote() {
@@ -45,5 +48,8 @@ export default {
     toSave(newVal, oldVal) {
       if (newVal === this.note.type) this.sendNote();
     },
+    emailNote(newVal, oldVal){
+      if(newVal) console.log(newVal);
+    }
   },
 };

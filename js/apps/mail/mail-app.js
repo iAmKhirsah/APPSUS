@@ -3,7 +3,7 @@ import emailList from "./cmps/email-list.cmp.js";
 import topBar from "./cmps/top-bar.cmp.js";
 import sideBar from "./cmps/side-bar.cmp.js";
 import emailCompose from "./cmps/email-compose.cmp.js";
-import { eventBus } from "../../../services/event-but-service.js";
+import { eventBus } from "../../../services/event-bus-service.js";
 export default {
     name: 'email-app',
     template: `
