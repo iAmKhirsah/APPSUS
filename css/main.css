@@ -1,26 +1,32 @@
 /* @import './css/cmps/app-header.css'; */
+
 @import '../css/cmps/app-header.css';
 @import '../css/apps/keep/keep-app.css';
 @import './apps/mail/mail-app.css';
+@import './cmps/app-home.css';
 @font-face {
-  font-family: fa;
-  src: url('../fonts/font-awesome.otf');
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    font-family: fa;
+    src: url('../fonts/font-awesome.otf');
 }
 
-/* HELPERS */
-.flex-height-fit {
-  display: flex;
-  height: fit-content;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+
+/* HELPERS */
+
+.flex-height-fit {
+    display: flex;
+    height: fit-content;
+}
+
 .hide {
-  display: none;
+    display: none;
 }
 
 .opacity-hide {
-  opacity: 0;
+    opacity: 0;
 }
