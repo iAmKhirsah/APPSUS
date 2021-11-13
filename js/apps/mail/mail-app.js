@@ -22,7 +22,8 @@ export default {
             emails: null,
             filterBy: { isRead: false, search: '' },
             criteria: { status: 'inbox', starred: false },
-            isCompose: false
+            isCompose: false,
+            testing: false
         }
     },
     created() {
@@ -32,10 +33,17 @@ export default {
         eventBus.$on('emailRemoves', () => emailService.query(this.criteria)
             .then(emails => this.emails = emails));
 
-        eventBus.$on('noteToMail', () => console.log(true));
+        eventBus.$on('noteToMail', (note) => {
+            this.$nextTick(() => {
+                this.changeCompose();
+            })
+
+        });
 
         emailService.query(this.criteria)
             .then(emails => this.emails = emails);
+    },
+    watch: {
 
     },
     methods: {
