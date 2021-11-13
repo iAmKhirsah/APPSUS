@@ -1,7 +1,7 @@
 export default {
     template: `
   <section class="main-header">
-      <h1>Appsus</h1>
+      <router-link to="/" class="appSus">Appsus</router-link>
     <nav>
         <router-link to="/">Home </router-link>
         <router-link to="/mail/">Mail </router-link>

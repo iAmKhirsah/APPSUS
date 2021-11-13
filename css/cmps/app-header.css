@@ -1,16 +1,36 @@
 .main-header {
-    background-color: lightblue;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
+  background-color: lightblue;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
 }
-
+.main-header .appSus {
+  display: flex;
+  align-self: center;
+  margin-inline-start: 50px;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.main-header nav a:hover {
+  background-color: #ececed;
+  border-radius: 5px;
+}
 .main-header nav {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  margin-inline-end: 100px;
+}
+.main-header nav a {
+  font-size: 1rem;
+  text-align: center;
+}
+.main-header nav a:not(:last-child) {
+  border-right: 1px solid black;
 }
 
 .main-header a {
-    padding: 5px;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
 }
