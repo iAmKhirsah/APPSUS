@@ -17,6 +17,7 @@ const routes = [{
             { path: 'draft', component: emailList },
             { path: 'sent', component: emailList },
             { path: 'trash', component: emailList },
+            { path: 'noteToMail', component: emailList },
             { path: ':emailId', component: emailDetails },
         ]
     },
