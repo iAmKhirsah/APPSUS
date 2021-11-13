@@ -1,11 +1,11 @@
 export default {
   props: ['note', 'hover'],
   template: `<div>
-    <div @click="update(note.id)">
-        <div v-for="(todo, idx) in note.info.todos" class="todo-div">
-                <input type="checkbox" :id="note.id + idx" @click="doneAt(note.id + idx)">
+    <div @click.self="update(note.id)">
+        <div v-for="(todo, idx) in note.info.todos" class="todo-div" >
+                <input type="checkbox" :id="note.id + idx">
                 <!-- <label :for="idx" :class="{idx:isDone}">{{todo.txt}} {{note.id+idx}}</label> -->
-                <label :for="note.id + idx" :class="{'line-through': done}">{{todo.txt}} {{note.id+idx}}</label>
+                <label :for="note.id + idx">{{todo.txt}}</label>
         </div>
     </div>
     <div :class="['in-note-control', isHover]">
@@ -13,7 +13,7 @@ export default {
     <!-- <label for="note-color-input" class="note-color-icon"></label>
       <input id="note-color-input" class="hide" type="color" v-model="color" @input="changeBackgroundColor"/> -->
     <div class="color-container">
-      <input type="color"  v-model="color" @input="changeBackgroundColor"/>
+      <input type="color"  v-model="color" @input="changeBackgroundColor" @blur="applyColor"/>
       <i class="fas fa-palette" :style="'background-color: ' + note.style.backgroundColor"></i>
       </div>
       <button class="mail-send-icon" @click="sendToMail"></button>
@@ -29,12 +29,6 @@ export default {
     };
   },
   methods: {
-    doneAt(id) {
-      console.log(this.note);
-
-      console.log(id);
-      this.done = !this.done;
-    },
     sendToMail() {
       this.$emit('sendMail', this.note);
     },
@@ -54,8 +48,11 @@ export default {
     update(noteId) {
       this.$emit('update', noteId);
     },
+    applyColor(){
+      this.$emit('applyColor', this.note)
+    },
     changeBackgroundColor() {
-      this.$emit('newBgc', this.color, this.note);
+      this.note.style.backgroundColor = this.color;
     },
   },
   computed: {

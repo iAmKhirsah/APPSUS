@@ -35,6 +35,7 @@ export default {
   methods: {
     sendToProcess() {
       let url = this.note.info.url;
+      console.log(url);
       this.$emit('urlProcess', url);
     },
     setUrl(url) {

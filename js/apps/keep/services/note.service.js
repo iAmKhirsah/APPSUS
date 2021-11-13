@@ -62,11 +62,11 @@ export const noteService = {
   processUrl,
   toPut,
   toRemove,
-  applyColor,
+  // applyColor,
   filter,
   sortedPins,
   toGet,
-  // processImg,
+
 };
 
 function query() {
@@ -127,13 +127,13 @@ function filter(type, title, notes) {
     return notesToShow;
   }
 }
-function applyColor(entityType, entityId, color) {
-  let res = asyncStorageService.get(entityType, entityId).then((note) => {
-    note.style.backgroundColor = color;
-    asyncStorageService.put(entityType, note);
-  });
-  return Promise.resolve(res);
-}
+// function applyColor(entityType, entityId, color) {
+//   let res = asyncStorageService.get(entityType, entityId).then((note) => {
+//     note.style.backgroundColor = color;
+//     asyncStorageService.put(entityType, note);
+//   });
+//   return Promise.resolve(res);
+// }
 // function processImg(e) {
 //   const image = e.target.files[0];
 //   const reader = new FileReader();

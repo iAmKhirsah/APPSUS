@@ -34,7 +34,6 @@ export default {
                   <input id="color-input" class="hide" type="color" v-model="note.style.backgroundColor"/> -->
                   <button @click="setNoteType('note-txt')" class="txt-icon"></button>
                   <button @click="setNoteType('note-todos')" class="todo-icon"></button>
-                  <!-- <button @click="setNoteType('note-img')" class="img-icon"></button> -->
                     <label for="img-input" class="img-icon" @click="setNoteType('note-img')"></label>
                     <input id="img-input" @change="uploadImage" type="file" accept="image/*" />
                   <button @click="setNoteType('note-vid')" class="vid-icon"></button>
@@ -46,7 +45,6 @@ export default {
   data() {
     return {
       toSave: null,
-      // fullInput: false,
       controls: false,
       focusOnTxt: false,
       processedImg: null,
@@ -103,11 +101,8 @@ export default {
     },
     urlProcess(url) {
       this.processedUrl = noteService.processUrl(url);
+      console.log(this.processedUrl);
     },
-    // imgToProcess(e) {
-    //   // this.processedImg = noteService.processImg(e);
-    //   // console.log(this.processedImg);
-    // },
     hideControls() {
       this.controls = !this.controls;
     },
@@ -124,24 +119,18 @@ export default {
         return;
       }
       if (
-        // (note.type === 'note-todos' && !note.info.todos.txt) ||
         (note.type === 'note-txt' && !note.info.txt)
       ) {
         this.note.type = null;
         this.controls = false;
         return;
       }
-      // if (!note.info.txt) return;
       if (!note.info.title) note.info.title = '';
       note.style.backgroundColor = this.note.style.backgroundColor;
       noteService.toPost('notes', note).then(() => {
         this.$emit('AddedNote');
-        // this.note.type = null;
-        // if ((this.note.type = 'note-txt')) return;
-        // else {
         this.note.type = null;
         this.controls = false;
-        // }
       });
     },
   },

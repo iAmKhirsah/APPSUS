@@ -7,7 +7,7 @@ export default {
   template: `
     <section class="note-container">
         <div v-for="note in notes" :key="note.id" class="flex-height-fit">
-          <keep-preview :note="note" @remove="remove" @update="update" @newBgc="newBgc" @sendMail="sendMail" @pinned="sortPinned" @duplicate="duplicate"/>
+          <keep-preview :note="note" @remove="remove" @applyColor="applyColor" @update="update" @sendMail="sendMail" @pinned="sortPinned" @duplicate="duplicate"/>
         </div>
     </section>`,
   methods: {
@@ -21,6 +21,9 @@ export default {
       // this.$emit('toSort', this.notes);
       this.$emit('toSort', this.notes, note);
     },
+    applyColor(note){
+      this.$emit('applyColor', note)
+    },
     sendToSave() {
       this.$emit('toSave', this.notes);
     },
@@ -29,9 +32,6 @@ export default {
     },
     update(noteId) {
       this.$emit('update', noteId);
-    },
-    newBgc(color, id) {
-      this.$emit('newBgc', color, id);
     },
   },
 };

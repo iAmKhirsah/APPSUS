@@ -10,7 +10,11 @@ export default {
               <input type="checkbox" :id="answer + idx">
               <label :for="answer + idx">{{answer.txt}}</label>
             </div>
-            <input class="edit-text-todo" v-if="edit" v-for="todo in note.info.todos" v-model="todo.txt" v-on:keyup.enter.prevent="newTodo()"/>
+            <div v-if="edit" v-for="(todo, idx) in note.info.todos">
+              <input type="checkbox" :id="todo + idx">
+              <input type="text" v-model="todo.txt">
+            </div>
+            <!-- <input class="edit-text-todo" v-if="edit" v-for="todo in note.info.todos" v-model="todo.txt" v-on:keyup.enter.prevent="newTodo()"/> -->
             <!-- <button @click="addTodo">Add todo</button> -->
             <textarea class="edit-text-todo" v-if="!edit" v-model="note.info.todos.txt" rows="4" cols="50" v-on:keyup.enter.prevent="newTodo()" placeholder="List..."></textarea>
             <!-- <button v-show="!noteToEdit" class="saveButton">Save</button> -->
@@ -18,6 +22,7 @@ export default {
   data() {
     return {
       edit: false,
+      check: null,
       note: {
         id: null,
         type: 'note-todos',

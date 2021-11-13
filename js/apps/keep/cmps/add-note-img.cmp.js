@@ -5,7 +5,7 @@ export default {
           <img v-if="note.info.url" :src="note.info.url" @mouseover="hover = true" @mouseleave="hover = false"/>
           <input v-model="note.info.title" type="text" placeholder="Title">
           <textarea v-model="note.info.txt" placeholder="Take img..." rows="4" cols="50"></textarea>
-          <button @click.prevent="clearImg" class="clear-img-btn" v-show="hover"></button>
+          <button v-if="!noteToEdit" @click.prevent="clearImg" class="clear-img-btn" v-show="hover" @mouseover="hover = true" @mouseleave="hover = false"></button>
           <!-- <label for="img-input" class="img-input-label"></label>
             <input id="img-input" @change="uploadImage" type="file" accept="image/*" />
           <!-- <button v-show="!noteToEdit">Save</button> -->

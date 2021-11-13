@@ -1,12 +1,20 @@
 .note-edit-container {
   position: absolute;
-  width: 300 px;
-  height: 300 px;
+  width: 600px;
+  height: fit-content;
+  padding: 25px;
+  border-radius: 5px;
   right: 50%;
   top: 50%;
   transform: translate(50%, -50%);
   display: flex;
   flex-direction: column;
+}
+.blur-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: rgba(39, 37, 37, 0.219);
 }
 .note-edit-container form {
   display: flex;
@@ -16,8 +24,33 @@
   width: 100%;
   height: 100%;
 }
+.note-edit-container h1 {
+  font-size: 1.2rem;
+}
+.update-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.update-controls > * {
+  margin-inline-start: 20px;
+}
 .note-edit-container form textarea {
+  padding: 0;
+  padding-top: 10px;
+  color: black;
   resize: none;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+.note-edit-container input[type='text'] {
+  margin-top: 10px;
+  color: black;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
 }
 .note-edit-container button {
   width: 80px;
@@ -25,6 +58,10 @@
 }
 
 .edit-text-todo {
-  width: 200px;
+  font-size: 1.2rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
   height: fit-content;
 }

@@ -11,7 +11,7 @@ export default {
 <!-- <label for="note-color-input" class="note-color-icon"></label>
       <input id="note-color-input" class="hide" type="color" v-model="color" @input="changeBackgroundColor"/> -->
 <div class="color-container">
-<input type="color" v-model="color" @input="changeBackgroundColor"/>
+<input type="color" v-model="color" @input="changeBackgroundColor" @blur="applyColor"/>
 <i class="fas fa-palette" :style="'background-color: ' + note.style.backgroundColor"></i>
 </div>
     <button class="mail-send-icon" @click="sendToMail"></button>
@@ -45,8 +45,11 @@ export default {
     update(noteId) {
       this.$emit('update', noteId);
     },
+    applyColor() {
+      this.$emit('applyColor', this.note);
+    },
     changeBackgroundColor() {
-      this.$emit('newBgc', this.color, this.note.id);
+      this.note.style.backgroundColor = this.color;
     },
   },
   computed: {

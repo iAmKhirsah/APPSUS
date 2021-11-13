@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 260px;
-  min-height: 50px;
+  min-height: 104px;
   border: 1px solid #cec9c9;
   border-radius: 5px;
   padding: 5px;
@@ -22,7 +22,6 @@
   text-decoration: none;
   color: black;
 }
-
 .in-note-control {
   display: flex;
   width: 100%;
@@ -108,7 +107,9 @@
 .color-container i::before {
   font-size: 16px;
 }
-
+.todo-div {
+  width: max-content;
+}
 /* HELPERS */
 .clicked {
   color: brown;

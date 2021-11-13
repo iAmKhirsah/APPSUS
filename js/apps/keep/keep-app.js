@@ -4,23 +4,28 @@ import notesList from './cmps/notes-list.cmp.js';
 import noteAdd from './cmps/note-add.cmp.js';
 import noteUpdate from './cmps/note-update.cmp.js';
 import keepAppHeader from './cmps/keep-app-header.cmp.js';
+import userMsg from './cmps/user-msg.cmp.js';
 export default {
   components: {
     notesList,
     noteAdd,
     noteUpdate,
     keepAppHeader,
+    userMsg,
   },
   template: `
     <section class="keep-app">
+      <div v-show="blur" class="blur-screen"></div>
+      <user-msg />
       <keep-app-header @filtered="filtered"/>
       <note-add @AddedNote="loadNotes"/>
-      <notes-list :notes="notesToShow" @remove="removeNote" @sendMail="sendMail" @update="updateNote" @newBgc="newBgc" @toSort="toSort" @duplicate="duplicate"/>
-      <note-update v-show="noteId" v-if="noteId" :noteId="noteId" @UpdatedNote="finalizeUpdate" @closeUpdate="noteId = null"/>
+      <notes-list :notes="notesToShow" @remove="removeNote" @applyColor="applyColor" @sendMail="sendMail" @update="updateNote" @toSort="toSort" @duplicate="duplicate"/>
+      <note-update v-show="noteId" v-if="noteId" :noteId="noteId" @blurScreen="blurScreen" @UpdatedNote="finalizeUpdate" @unblurScreen="unblurScreen" @closeUpdate="noteId = null"/>
     </section>
     `,
   data() {
     return {
+      blur: false,
       notes: null,
       noteId: null,
       filterBy: '',
@@ -30,6 +35,9 @@ export default {
     this.loadNotes();
   },
   methods: {
+    blurScreen() {
+      this.blur = true;
+    },
     sendMail(note) {
       let id = note.id;
       eventBus.$emit('noteToMail', note.info);
@@ -38,10 +46,49 @@ export default {
         this.$router.push({ path: 'mail/', query: { id: id } });
       });
     },
+    unblurScreen() {
+      console.log('hello');
+      this.blur = false;
+    },
+    applyColor(note) {
+      noteService
+        .toPut('notes', note)
+        .then(() => {
+          this.loadNotes;
+          const msg = {
+            txt: 'Color Applied',
+            type: 'Success',
+          };
+          eventBus.$emit('showMsg', msg);
+        })
+        .catch((err) => {
+          console.log(err);
+          const msg = {
+            txt: 'Error, Please concact our intern',
+            type: 'Failure',
+          };
+          eventBus.$emit('showMsg', msg);
+        });
+    },
     duplicate(note) {
-      noteService.toPost('notes', note).then(() => {
-        this.loadNotes();
-      });
+      noteService
+        .toPost('notes', note)
+        .then(() => {
+          this.loadNotes();
+          const msg = {
+            txt: 'Note Duplicated',
+            type: 'Success',
+          };
+          eventBus.$emit('showMsg', msg);
+        })
+        .catch((err) => {
+          console.log(err);
+          const msg = {
+            txt: 'Error, Please concact our intern',
+            type: 'Failure',
+          };
+          eventBus.$emit('showMsg', msg);
+        });
     },
     toSort(notes, note) {
       if (note) {
@@ -71,23 +118,36 @@ export default {
       this.noteId = id;
     },
     removeNote(id) {
-      noteService.toRemove('notes', id).then(() => {
-        this.loadNotes();
-      });
+      noteService
+        .toRemove('notes', id)
+        .then(() => {
+          this.loadNotes();
+          const msg = {
+            txt: 'Note Removed',
+            type: 'Success',
+          };
+          eventBus.$emit('showMsg', msg);
+        })
+        .catch((err) => {
+          console.log(err);
+          const msg = {
+            txt: 'Error, Please concact our intern',
+            type: 'Failure',
+          };
+          eventBus.$emit('showMsg', msg);
+        });
     },
-    newBgc(color, id) {
-      let note = id
-      // console.log('hello');
-      // noteService.toGet('notes', id).then((note) => {
-      // console.log(note);
-      console.log(note);
-      id.style.backgroundColor = color;
-      // });
-      // noteService.applyColor('notes', id, color).then(() => {
-      //   console.log('hello');
-      // this.loadNotes();
-      // });
-    },
+    //   newBgc(color, note) {
+    //     // console.log('hello');
+    //     // noteService.toGet('notes', id).then((note) => {
+    //     // console.log(note);
+    //     // note.style.backgroundColor = color;
+    //     // });
+    //     // noteService.applyColor('notes', id, color).then(() => {
+    //     //   console.log('hello');
+    //     // this.loadNotes();
+    //     // });
+    //   },
   },
   computed: {
     notesToShow() {

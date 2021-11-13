@@ -3,7 +3,7 @@ export default {
     <section :class="['filter-container',activeSearch]" tabindex="0" @focusout="clicked = false">
             <span class="magnifying-glass"></span>
             <input v-model="filterBy.title" @mousedown="showFeatures" @input="filter" type="search" placeholder="Search..." :class="['filter-search', activeSearch]">
-            <select v-model="filterBy.type" v-if="clicked"  @change="filter">
+            <select v-model="filterBy.type" @change="filter">
               <option value="">All</option>
               <option value="note-txt">Txt</option>
               <option value="note-todos">Todos</option>
