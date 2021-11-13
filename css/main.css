@@ -4,7 +4,7 @@
 @import './apps/mail/mail-app.css';
 @font-face {
   font-family: fa;
-  src: url('../../../fonts/font-awesome.otf');
+  src: url('../fonts/font-awesome.otf');
 }
 * {
   margin: 0;
@@ -17,13 +17,10 @@
   display: flex;
   height: fit-content;
 }
-/* TEMP SHOULD NOT BE HERE */
-ul li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.hide {
+  display: none;
 }
-.edit-text-todo {
-  width: 200px;
-  height: fit-content;
+
+.opacity-hide {
+  opacity: 0;
 }

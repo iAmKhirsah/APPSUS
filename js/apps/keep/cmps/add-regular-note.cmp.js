@@ -1,12 +1,12 @@
 export default {
   //   props: ['note.type'],
-  props: ['noteToEdit'],
+  props: ['noteToEdit', 'focusOnTxt', 'toSave'],
   template: `
        <form @submit.prevent="sendNote"> 
         <input type="text" v-model="note.info.title" placeholder="Title">
         <!-- <input v-model="note.info.txt" type="text" placeholder="Take note..."> -->
-        <textarea v-model="note.info.txt" placeholder="Take note..." rows="4" cols="50"></textarea>
-        <button v-show="!noteToEdit">Save</button>
+        <textarea ref="txtNote" v-model="note.info.txt" placeholder="Take note..." rows="4" cols="50"></textarea>
+        <!-- <button v-show="!noteToEdit">Save</button> -->
        </form>`,
   data() {
     return {
@@ -19,7 +19,7 @@ export default {
           title: null,
         },
         style: {
-          backgroundColor: '#808080',
+          backgroundColor: '#ffffff',
         },
       },
     };
@@ -32,6 +32,18 @@ export default {
   methods: {
     sendNote() {
       this.$emit('noteTxt', this.note);
+      this.$nextTick(() => {
+        this.note.info.title = null;
+        this.note.info.txt = null;
+      });
+    },
+  },
+  watch: {
+    focusOnTxt(newVal, oldVal) {
+      this.$refs.txtNote.focus();
+    },
+    toSave(newVal, oldVal) {
+      if (newVal === this.note.type) this.sendNote();
     },
   },
 };

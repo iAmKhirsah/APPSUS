@@ -3,6 +3,13 @@
 @import '../keep/cmps/note-update.css';
 @import '../keep/parts/keep-app-header.css';
 
+@font-face {
+  font-family: rubik;
+  src: url('../../../fonts/Rubik-Regular.ttf');
+}
+* {
+  font-family: rubik;
+}
 /* .note-container {
   display: flex;
   flex-wrap: wrap;
@@ -17,4 +24,11 @@
   grid-auto-rows: minmax(min-content, max-content);
   justify-items: center;
   margin-top: 20px;
+}
+
+/* general */
+ul li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }

@@ -1,9 +1,9 @@
 export default {
   template: `
-    <section>
+    <section :class="['filter-container',activeSearch]">
             <span class="magnifying-glass"></span>
-            <input v-model="filterBy.title" @mousedown="showFeatures" @input="filter" type="search" placeholder="Search...">
-            <select v-model="filterBy.type" v-if="clicked" @change="filter">
+            <input v-model="filterBy.title" @mousedown="showFeatures" @input="filter" type="search" placeholder="Search..." :class="['filter-search', activeSearch]">
+            <select v-model="filterBy.type" v-if="clicked"  @change="filter">
               <option value="">All</option>
               <option value="note-txt">Txt</option>
               <option value="note-todos">Todos</option>
@@ -29,6 +29,11 @@ export default {
     },
     filter() {
       this.$emit('filtered', JSON.parse(JSON.stringify(this.filterBy)));
+    },
+  },
+  computed: {
+    activeSearch() {
+      return {'active-search' :  this.clicked}
     },
   },
 };

@@ -4,6 +4,7 @@
   align-items: center;
   width: 200px;
   min-height: 50px;
+  border: 1px solid #cec9c9;
   border-radius: 5px;
   padding: 5px;
   overflow-wrap: break-word;
@@ -33,21 +34,27 @@
 
 .remove-note,
 .pin-note,
-.duplicate {
+.duplicate,
+.note-color-icon {
   background-color: transparent;
   align-self: flex-end;
   border: none;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 .remove-note:hover {
   color: red;
 }
 .pin-note:hover,
-.duplicate:hover {
+.duplicate:hover,
+.note-color-icon:hover {
   color: gold;
 }
-
+.note-color-icon::before{
+  font-family: fa;
+  content: '\f53f'
+}
 .remove-note::before {
   font-family: fa;
   content: '\f1f8';
@@ -66,7 +73,7 @@
   content: '\f24d';
 }
 
-.color-container {
+/* .color-container {
   width: 15px;
   height: 15px;
   background-color: transparent;
@@ -94,7 +101,7 @@
 }
 .color-container i::before {
   font-size: 16px;
-}
+} */
 
 /* HELPERS */
 .clicked {

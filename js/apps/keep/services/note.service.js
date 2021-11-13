@@ -11,7 +11,7 @@ const notes = [
       title: '',
     },
     style: {
-      backgroundColor: '#808080',
+      backgroundColor: '#ffffff',
     },
   },
   {
@@ -23,7 +23,7 @@ const notes = [
       title: 'Bobi and Me',
     },
     style: {
-      backgroundColor: '#808080',
+      backgroundColor: '#ffffff',
     },
   },
   {
@@ -38,7 +38,7 @@ const notes = [
       ],
     },
     style: {
-      backgroundColor: '#808080',
+      backgroundColor: '#ffffff',
     },
   },
   {
@@ -50,7 +50,7 @@ const notes = [
       title: 'my first video',
     },
     style: {
-      backgroundColor: '#808080',
+      backgroundColor: '#ffffff',
     },
   },
 ];
@@ -65,6 +65,7 @@ export const noteService = {
   applyColor,
   filter,
   sortedPins,
+  toGet,
   // processImg,
 };
 
@@ -84,6 +85,10 @@ function sortedPins(notes) {
   notes.sort((x, y) => {
     return x.isPinned === y.isPinned ? 0 : x.isPinned ? -1 : 1;
   });
+}
+function toGet(entityType, entityId) {
+  let res = asyncStorageService.get(entityType, entityId);
+  return Promise.resolve(res);
 }
 function toPut(entityType, updatedEntity) {
   let res = asyncStorageService.put(entityType, updatedEntity);

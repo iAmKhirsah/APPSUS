@@ -13,10 +13,12 @@ export default {
   },
   template: `
     <div class="flex-height-fit">
-      <component :note="note" :is="noteType" class="note" @remove="remove" @update="update" @pinned="pinned" @newBgc="newBgc" @duplicate="duplicate" :style="'background-color: ' + note.style.backgroundColor">{{note}}</component>
+      <component :note="note" :is="noteType" :hover="hover" class="note" @remove="remove" @update="update" @pinned="pinned" @newBgc="newBgc" @duplicate="duplicate" :style="'background-color: ' + note.style.backgroundColor" @mouseover.native="hover = true" @mouseleave.native="hover = false">{{note}}</component>
     </div>`,
   data() {
-    return {};
+    return {
+      hover: null,
+    };
   },
   methods: {
     duplicate(note) {
