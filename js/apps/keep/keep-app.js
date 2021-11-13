@@ -30,8 +30,12 @@ export default {
     this.loadNotes();
   },
   methods: {
-    sendMail(note){
-      eventBus.$emit('noteToMail', note.info)
+    sendMail(note) {
+      console.log(note);
+      eventBus.$emit('noteToMail', note.info);
+      this.$nextTick(() => {
+        this.$router.push('/mail/');
+      });
     },
     duplicate(note) {
       noteService.toPost('notes', note).then(() => {

@@ -35,7 +35,8 @@
 .remove-note,
 .pin-note,
 .duplicate,
-.note-color-icon {
+.note-color-icon,
+.mail-send-icon {
   background-color: transparent;
   align-self: flex-end;
   border: none;
@@ -48,8 +49,13 @@
 }
 .pin-note:hover,
 .duplicate:hover,
-.note-color-icon:hover {
+.note-color-icon:hover,
+.mail-send-icon:hover {
   color: gold;
+}
+.mail-send-icon::before{
+  font-family: fa;
+  content: '\f1d8'
 }
 .note-color-icon::before{
   font-family: fa;
