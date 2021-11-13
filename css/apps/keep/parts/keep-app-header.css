@@ -23,7 +23,7 @@
   margin-inline-start: 60px;
   border: 1px solid #c2c3c5;
 }
-input.active-search{
+input.active-search {
   background-color: #ffffff;
   outline: none;
   border: none;
@@ -42,4 +42,17 @@ input.active-search{
 .magnifying-glass::before {
   font-family: fa;
   content: '\f002';
+}
+
+@media (max-width: 670px) {
+  .search-bar {
+    width: 100%;
+    margin-inline-start: 0;
+    margin: 20px;
+  }
+}
+@media (max-width: 570px) {
+  .filter-search {
+    width: 60%;
+  }
 }

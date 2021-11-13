@@ -197,3 +197,13 @@ textarea {
  font-family: fa;
  content: '\f574'
 } */
+
+
+
+@media(max-width: 670px){
+  .main-note-form{
+    margin: 10px;
+    width: 100%;
+  }
+
+}

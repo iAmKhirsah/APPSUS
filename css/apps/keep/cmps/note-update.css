@@ -65,3 +65,14 @@
   width: 100%;
   height: fit-content;
 }
+
+@media (max-width: 670px) {
+  .note-edit-container {
+    width: 80%;
+    position: fixed;
+  }
+  .blur-screen {
+    position: fixed;
+    height: 100%;
+  }
+}

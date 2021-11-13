@@ -123,9 +123,7 @@ export default {
         this.controls = false;
         return;
       }
-      if (
-        (note.type === 'note-txt' && !note.info.txt)
-      ) {
+      if (note.type === 'note-txt' && !note.info.txt) {
         this.note.type = null;
         this.controls = false;
         return;
