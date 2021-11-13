@@ -15,9 +15,7 @@ export default {
             <div class="compose-email-buttons">
                 <button @click="save('draft')">Draft</button>
                 <button @click="close">Remove</button>
-            </div>
-            <!-- <div class="compose-background"></div> -->
-            
+            </div>            
         </section>
     `,
     data() {
@@ -44,7 +42,7 @@ export default {
                 false,
                 this.email.to, { status, starred: false }
             ));
-            this.$emit('composeNew');
+            this.$emit('compose');
         },
         close() {
             this.$emit('compose');
