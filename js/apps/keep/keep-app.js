@@ -31,63 +31,101 @@ export default {
     },
     methods: {
         sendMail(note) {
-            let id = note.id
+            let id = note.id;
             eventBus.$emit('noteToMail', note.info);
             this.$nextTick(() => {
                 // this.$router.push('/mail/noteToMail');
-                this.$router.push({ path: 'mail', query: { id: id } });
+                this.$router.push({ path: 'mail/', query: { id: id } });
             });
         },
-        duplicate(note) {
-            noteService.toPost('notes', note).then(() => {
-                this.loadNotes();
-            });
-        },
-        toSort(notes, note) {
-            if (note) {
-                noteService.toPut('notes', note);
-            }
-            if (!notes) notes = this.notes;
-            return noteService.sortedPins(notes);
-        },
-        filtered(filterBy) {
-            this.filterBy = filterBy;
-        },
-        finalizeUpdate() {
-            this.noteId = null;
+        created() {
             this.loadNotes();
         },
-        loadNotes() {
-            noteService
-                .query()
-                .then((notes) => {
-                    this.notes = notes;
-                })
-                .then(() => {
-                    this.toSort();
+        <<
+        << << < HEAD
+        methods: {
+            sendMail(note) {
+                let id = note.id
+                eventBus.$emit('noteToMail', note.info);
+                this.$nextTick(() => {
+                    // this.$router.push('/mail/noteToMail');
+                    this.$router.push({ path: 'mail', query: { id: id } });
                 });
-        },
-        updateNote(id) {
-            this.noteId = id;
-        },
-        removeNote(id) {
-            noteService.toRemove('notes', id).then(() => {
+            },
+            duplicate(note) {
+                noteService.toPost('notes', note).then(() => {
+                    this.loadNotes();
+                });
+            },
+            toSort(notes, note) {
+                if (note) {
+                    noteService.toPut('notes', note);
+                }
+                if (!notes) notes = this.notes;
+                return noteService.sortedPins(notes);
+            },
+            filtered(filterBy) {
+                this.filterBy = filterBy;
+            },
+            finalizeUpdate() {
+                this.noteId = null;
                 this.loadNotes();
-            });
-        },
-        newBgc(color, id) {
-            noteService.applyColor('notes', id, color).then(() => {
-                this.loadNotes();
-            });
-        },
-    },
-    computed: {
-        notesToShow() {
-            return noteService.filter(
-                this.filterBy.type,
-                this.filterBy.title,
-                this.notes
-            );
-        },
-    },
-};
+            },
+            loadNotes() {
+                noteService
+                    .query()
+                    .then((notes) => {
+                        this.notes = notes;
+                    })
+                    .then(() => {
+                        this.toSort();
+                    });
+            },
+            updateNote(id) {
+                this.noteId = id;
+            },
+            removeNote(id) {
+                noteService.toRemove('notes', id).then(() => {
+                    this.loadNotes();
+                });
+            },
+            newBgc(color, id) {
+                noteService.applyColor('notes', id, color).then(() => {
+                    this.loadNotes();
+                });
+            },
+            ===
+            === =
+            updateNote(id) {
+                this.noteId = id;
+            },
+            removeNote(id) {
+                noteService.toRemove('notes', id).then(() => {
+                    this.loadNotes();
+                });
+            },
+            newBgc(color, id) {
+                let note = id
+                    // console.log('hello');
+                    // noteService.toGet('notes', id).then((note) => {
+                    // console.log(note);
+                console.log(note);
+                id.style.backgroundColor = color;
+                // });
+                // noteService.applyColor('notes', id, color).then(() => {
+                //   console.log('hello');
+                // this.loadNotes();
+                // });
+                >>>
+                >>> > 92 cf29f343594c8e34b9c26027e1809a7c59a672
+            },
+            computed: {
+                notesToShow() {
+                    return noteService.filter(
+                        this.filterBy.type,
+                        this.filterBy.title,
+                        this.notes
+                    );
+                },
+            },
+        };

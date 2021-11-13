@@ -2,10 +2,11 @@ export default {
   props: ['note', 'hover'],
   template: `<div>
     <div @click="update(note.id)">
-       <div v-for="(todo, idx) in note.info.todos" class="todo-div">
-      <input type="checkbox" :id="note.id + idx" @click="doneAt">
-      <label :for="note.id + idx" :class="[note.id + idx, isDone]">{{todo.txt}}</label>
-      </div>
+        <div v-for="(todo, idx) in note.info.todos" class="todo-div">
+                <input type="checkbox" :id="note.id + idx" @click="doneAt(note.id + idx)">
+                <!-- <label :for="idx" :class="{idx:isDone}">{{todo.txt}} {{note.id+idx}}</label> -->
+                <label :for="note.id + idx" :class="{'line-through': done}">{{todo.txt}} {{note.id+idx}}</label>
+        </div>
     </div>
     <div :class="['in-note-control', isHover]">
     <button @click="setPinned" class="pin-note" :class="checkClicked"></button>
@@ -28,7 +29,10 @@ export default {
     };
   },
   methods: {
-    doneAt() {
+    doneAt(id) {
+      console.log(this.note);
+
+      console.log(id);
       this.done = !this.done;
     },
     sendToMail() {
@@ -51,7 +55,7 @@ export default {
       this.$emit('update', noteId);
     },
     changeBackgroundColor() {
-      this.$emit('newBgc', this.color, this.note.id);
+      this.$emit('newBgc', this.color, this.note);
     },
   },
   computed: {
@@ -60,9 +64,6 @@ export default {
     },
     isHover() {
       return this.toHover ? '' : 'opacity-hide';
-    },
-    isDone() {
-      return this.done ? 'line-through' : '';
     },
   },
   watch: {
