@@ -33,6 +33,11 @@ export default {
     // }
   },
   methods: {
+    mailToNote(newVal){
+      this.note.info.title = newVal.subject
+      this.note.info.txt = newVal.from
+      this.note.info.txt += newVal.body
+    },
     sendNote() {
       this.$emit('noteTxt', this.note);
       this.$nextTick(() => {
@@ -49,7 +54,9 @@ export default {
       if (newVal === this.note.type) this.sendNote();
     },
     emailNote(newVal, oldVal){
-      if(newVal) console.log(newVal);
+      if(newVal){
+        this.mailToNote(newVal)
+      };
     }
   },
 };
