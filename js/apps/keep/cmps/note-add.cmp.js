@@ -79,6 +79,9 @@ export default {
     ////////////////////////////////
     saveToNote() {
       this.toSave = this.note.type;
+      this.$nextTick(()=>{
+        this.toSave = null;
+      })
     },
     expandSearch() {
       this.focusOnTxt = true;

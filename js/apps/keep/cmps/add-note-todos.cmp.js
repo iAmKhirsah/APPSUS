@@ -3,9 +3,13 @@ export default {
   template: `
            <form @submit.prevent="sendNote"> 
             <input v-model="note.info.title" type="text" placeholder="Title">
-            <ul v-for="answer in answers" >
-              <li>{{answer.txt}}</li>
-            </ul>
+            <!-- <ul v-for="answer in answers" >
+              <li checkbox="unchecked">{{answer.txt}}</li>
+            </ul> -->
+            <div v-for="(answer, idx) in answers" class="todo-div">
+              <input type="checkbox" :id="answer + idx">
+              <label :for="answer + idx">{{answer.txt}}, {{idx}}</label>
+            </div>
             <input class="edit-text-todo" v-if="edit" v-for="todo in note.info.todos" v-model="todo.txt" v-on:keyup.enter.prevent="newTodo()"/>
             <!-- <button @click="addTodo">Add todo</button> -->
             <textarea class="edit-text-todo" v-if="!edit" v-model="note.info.todos.txt" rows="4" cols="50" v-on:keyup.enter.prevent="newTodo()" placeholder="List..."></textarea>
