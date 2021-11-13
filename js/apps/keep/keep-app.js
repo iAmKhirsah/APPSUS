@@ -5,13 +5,13 @@ import noteAdd from './cmps/note-add.cmp.js';
 import noteUpdate from './cmps/note-update.cmp.js';
 import keepAppHeader from './cmps/keep-app-header.cmp.js';
 export default {
-    components: {
-        notesList,
-        noteAdd,
-        noteUpdate,
-        keepAppHeader,
-    },
-    template: `
+  components: {
+    notesList,
+    noteAdd,
+    noteUpdate,
+    keepAppHeader,
+  },
+  template: `
     <section class="keep-app">
       <keep-app-header @filtered="filtered"/>
       <note-add @AddedNote="loadNotes"/>
@@ -19,82 +19,74 @@ export default {
       <note-update v-show="noteId" v-if="noteId" :noteId="noteId" @UpdatedNote="finalizeUpdate" @closeUpdate="noteId = null"/>
     </section>
     `,
-    data() {
-        return {
-            notes: null,
-            noteId: null,
-            filterBy: '',
-        };
+  data() {
+    return {
+      notes: null,
+      noteId: null,
+      filterBy: '',
+    };
+  },
+  created() {
+    this.loadNotes();
+  },
+  methods: {
+    sendMail(note) {
+      eventBus.$emit('noteToMail', note.info);
+      console.log(note);
+      this.$nextTick(() => {
+        this.$router.push('/mail/');
+      });
     },
-    created() {
+    duplicate(note) {
+      noteService.toPost('notes', note).then(() => {
         this.loadNotes();
+      });
     },
-    methods: {
-        sendMail(note) {
-            console.log(note);
-            eventBus.$emit('noteToMail', note.info);
-            this.$nextTick(() => {
-                this.$router.push('/mail/');
-            });
-        },
-        created() {
-            this.loadNotes();
-        },
-        methods: {
-            sendMail(note) {
-                eventBus.$emit('noteToMail', note.info);
-            },
-            duplicate(note) {
-                noteService.toPost('notes', note).then(() => {
-                    this.loadNotes();
-                });
-            },
-            toSort(notes, note) {
-                if (note) {
-                    noteService.toPut('notes', note);
-                }
-                if (!notes) notes = this.notes;
-                return noteService.sortedPins(notes);
-            },
-            filtered(filterBy) {
-                this.filterBy = filterBy;
-            },
-            finalizeUpdate() {
-                this.noteId = null;
-                this.loadNotes();
-            },
-            loadNotes() {
-                noteService
-                    .query()
-                    .then((notes) => {
-                        this.notes = notes;
-                    })
-                    .then(() => {
-                        this.toSort();
-                    });
-            },
-            updateNote(id) {
-                this.noteId = id;
-            },
-            removeNote(id) {
-                noteService.toRemove('notes', id).then(() => {
-                    this.loadNotes();
-                });
-            },
-            newBgc(color, id) {
-                noteService.applyColor('notes', id, color).then(() => {
-                    this.loadNotes();
-                });
-            },
-        },
-        computed: {
-            notesToShow() {
-                return noteService.filter(
-                    this.filterBy.type,
-                    this.filterBy.title,
-                    this.notes
-                );
-            },
-        },
-    }
-}
+    toSort(notes, note) {
+      if (note) {
+        noteService.toPut('notes', note);
+      }
+      if (!notes) notes = this.notes;
+      return noteService.sortedPins(notes);
+    },
+    filtered(filterBy) {
+      this.filterBy = filterBy;
+    },
+    finalizeUpdate() {
+      this.noteId = null;
+      this.loadNotes();
+    },
+    loadNotes() {
+      noteService
+        .query()
+        .then((notes) => {
+          this.notes = notes;
+        })
+        .then(() => {
+          this.toSort();
+        });
+    },
+    updateNote(id) {
+      this.noteId = id;
+    },
+    removeNote(id) {
+      noteService.toRemove('notes', id).then(() => {
+        this.loadNotes();
+      });
+    },
+    newBgc(color, id) {
+      noteService.applyColor('notes', id, color).then(() => {
+        this.loadNotes();
+      });
+    },
+  },
+  computed: {
+    notesToShow() {
+      return noteService.filter(
+        this.filterBy.type,
+        this.filterBy.title,
+        this.notes
+      );
+    },
+  },
+};
