@@ -32,11 +32,10 @@ export default {
   methods: {
     sendMail(note) {
       let id = note.id
-      let txt = note.info.txt
       eventBus.$emit('noteToMail', note.info);
       this.$nextTick(() => {
         // this.$router.push('/mail/noteToMail');
-        this.$router.push({path:'mail', query: {txt: txt}});
+        this.$router.push({path:'mail', query: {id: id}});
       });
     },
     duplicate(note) {
