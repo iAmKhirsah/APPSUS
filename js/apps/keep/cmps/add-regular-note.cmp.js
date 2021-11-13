@@ -1,5 +1,4 @@
 export default {
-  //   props: ['note.type'],
   props: ['noteToEdit', 'focusOnTxt', 'toSave', 'emailNote'],
   template: `
        <form @submit.prevent="sendNote"> 
@@ -35,8 +34,11 @@ export default {
   methods: {
     mailToNote(newVal){
       this.note.info.title = newVal.subject
-      this.note.info.txt = newVal.from
+      this.note.info.txt = 'From: ' + newVal.from + '\n'
       this.note.info.txt += newVal.body
+      this.$nextTick(()=>{
+        this.sendNote()
+      })
     },
     sendNote() {
       this.$emit('noteTxt', this.note);
@@ -54,6 +56,7 @@ export default {
       if (newVal === this.note.type) this.sendNote();
     },
     emailNote(newVal, oldVal){
+      console.log(newVal);
       if(newVal){
         this.mailToNote(newVal)
       };

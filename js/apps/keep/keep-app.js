@@ -1,5 +1,5 @@
 import { noteService } from './services/note.service.js';
-import { asyncStorageService } from '../../../services/async-storage-service.js';
+import { eventBus } from '../../../services/event-bus-service.js';
 import notesList from './cmps/notes-list.cmp.js';
 import noteAdd from './cmps/note-add.cmp.js';
 import noteUpdate from './cmps/note-update.cmp.js';
@@ -15,7 +15,7 @@ export default {
     <section class="keep-app">
       <keep-app-header @filtered="filtered"/>
       <note-add @AddedNote="loadNotes"/>
-      <notes-list :notes="notesToShow" @remove="removeNote" @update="updateNote" @newBgc="newBgc" @toSort="toSort" @duplicate="duplicate"/>
+      <notes-list :notes="notesToShow" @remove="removeNote" @sendMail="sendMail" @update="updateNote" @newBgc="newBgc" @toSort="toSort" @duplicate="duplicate"/>
       <note-update v-show="noteId" v-if="noteId" :noteId="noteId" @UpdatedNote="finalizeUpdate" @closeUpdate="noteId = null"/>
     </section>
     `,
@@ -30,6 +30,9 @@ export default {
     this.loadNotes();
   },
   methods: {
+    sendMail(note){
+      eventBus.$emit('noteToMail', note.info)
+    },
     duplicate(note) {
       noteService.toPost('notes', note).then(() => {
         this.loadNotes();

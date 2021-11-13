@@ -13,7 +13,7 @@ export default {
   },
   template: `
     <div class="flex-height-fit">
-      <component :note="note" :is="noteType" :hover="hover" class="note" @remove="remove" @update="update" @pinned="pinned" @newBgc="newBgc" @duplicate="duplicate" :style="'background-color: ' + note.style.backgroundColor" @mouseover.native="hover = true" @mouseleave.native="hover = false">{{note}}</component>
+      <component :note="note" :is="noteType" :hover="hover" class="note" @remove="remove" @update="update" @pinned="pinned" @newBgc="newBgc" @sendMail="sendMail" @duplicate="duplicate" :style="'background-color: ' + note.style.backgroundColor" @mouseover.native="hover = true" @mouseleave.native="hover = false">{{note}}</component>
     </div>`,
   data() {
     return {
@@ -21,6 +21,9 @@ export default {
     };
   },
   methods: {
+    sendMail(note){
+      this.$emit('sendMail', note)
+    },
     duplicate(note) {
       this.$emit('duplicate', note);
     },

@@ -7,10 +7,13 @@ export default {
   template: `
     <section class="note-container">
         <div v-for="note in notes" :key="note.id" class="flex-height-fit">
-          <keep-preview :note="note" @remove="remove" @update="update" @newBgc="newBgc" @pinned="sortPinned" @duplicate="duplicate"/>
+          <keep-preview :note="note" @remove="remove" @update="update" @newBgc="newBgc" @sendMail="sendMail" @pinned="sortPinned" @duplicate="duplicate"/>
         </div>
     </section>`,
   methods: {
+    sendMail(note){
+      this.$emit('sendMail', note)
+    },
     duplicate(note) {
       this.$emit('duplicate', note);
     },
