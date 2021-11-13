@@ -124,7 +124,7 @@ export default {
         return;
       }
       if (
-        (note.type === 'note-todos' && !note.info.todos.txt) ||
+        // (note.type === 'note-todos' && !note.info.todos.txt) ||
         (note.type === 'note-txt' && !note.info.txt)
       ) {
         this.note.type = null;

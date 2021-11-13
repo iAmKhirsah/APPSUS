@@ -31,11 +31,11 @@ export default {
   },
   methods: {
     sendMail(note) {
-      let id = note.id
+      let id = note.id;
       eventBus.$emit('noteToMail', note.info);
       this.$nextTick(() => {
         // this.$router.push('/mail/noteToMail');
-        this.$router.push({path:'mail', query: {id: id}});
+        this.$router.push({ path: 'mail/', query: { id: id } });
       });
     },
     duplicate(note) {
@@ -76,9 +76,17 @@ export default {
       });
     },
     newBgc(color, id) {
-      noteService.applyColor('notes', id, color).then(() => {
-        this.loadNotes();
-      });
+      let note = id
+      // console.log('hello');
+      // noteService.toGet('notes', id).then((note) => {
+      // console.log(note);
+      console.log(note);
+      id.style.backgroundColor = color;
+      // });
+      // noteService.applyColor('notes', id, color).then(() => {
+      //   console.log('hello');
+      // this.loadNotes();
+      // });
     },
   },
   computed: {
