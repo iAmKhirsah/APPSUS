@@ -9,8 +9,8 @@ export default {
         <p> {{email.body}}</p>
         <span><b>Sent At :</b> {{dateTime}}</span>
         <div class='detail-buttons'>
-            <router-link to="/mail" @click.native="deleteEmail">delete</router-link>
-            <router-link to="/mail">Back</router-link>
+            <router-link to="/mail/" @click.native="deleteEmail">Delete</router-link>
+            <router-link to="/mail/" @click.native="toggleTopBar">Back</router-link>
             <button @click="saveNote">Save as note</button>
         </div>
     </section>
@@ -21,6 +21,7 @@ export default {
         }
     },
     created() {
+        eventBus.$emit('detailsToggle');
         const emailId = this.$route.params.emailId;
         emailService.getById(emailId)
             .then((email) => {
@@ -28,6 +29,7 @@ export default {
                 this.email.isRead = true;
                 emailService.save(this.email);
             });
+
     },
     computed: {
         dateTime() {
@@ -43,7 +45,11 @@ export default {
     },
     methods: {
         deleteEmail() {
-            emailService.remove(this.email.id);
+            emailService.remove(this.email.id)
+                .then(() => {
+                    eventBus.$emit('emailRemoves')
+                    this.toggleTopBar();
+                });
         },
         saveNote() {
             eventBus.$emit('emailToNote', {
@@ -51,6 +57,9 @@ export default {
                 subject: this.email.subject,
                 body: this.email.body
             });
+        },
+        toggleTopBar() {
+            eventBus.$emit('detailsToggle');
         }
     }
 }

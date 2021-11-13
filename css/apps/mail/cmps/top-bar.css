@@ -27,11 +27,11 @@
     font-size: 1.7rem;
     margin-inline-end: 100px;
     color: darkgray;
-    cursor: default;
+    cursor: pointer;
 }
 
 .logo img {
-    margin-inline-end: 20px;
+    margin-inline-end: 10px;
     margin-inline-start: 10px;
     max-width: 40px;
     grid-area: "top-bar";

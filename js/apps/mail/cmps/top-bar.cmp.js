@@ -1,23 +1,20 @@
+import { eventBus } from "../../../../services/event-but-service.js";
 export default {
     name: 'email-filter',
     props: ['emails'],
     template: `
         <section class="top-bar">
-            <div class="logo">
+            <div @click="goHome" class="logo">
                 <img src="./img/logo.png"/>
                 <span>Gmail</span>
             </div>
-
-            <input class='search-input' id="search-filter" type="text" v-model="filterBy.search" @input="filter" placeholder="Search mail"/>
-                
-            
-            <label class='read-filter' for="read-filter">
+            <input v-if="!isDetails" class='search-input' id="search-filter" type="text" v-model="filterBy.search" @input="filter" placeholder="Search mail"/>
+            <label v-if="!isDetails" class='read-filter' for="read-filter">
                 Read only
                 <input id="read-filter" type="checkbox" v-model="filterBy.read" @change="filter"/>
             </label>
-            <span class="unread-count">Unread count : {{unreadCount}}</span>
-
-            <section class="sorting">
+            <span  v-if="!isDetails" class="unread-count">Unread count : {{unreadCount}}</span>
+            <section  v-if="!isDetails" class="sorting">
                 <span>Sort By : </span>
                 <label for="new">new
                     <input type="radio" name="sorting" value="new" id="new" v-model="sortBy" @change="selected"> 
@@ -37,9 +34,12 @@ export default {
                 read: false,
                 search: '',
             },
-            sortBy: null
-
+            sortBy: null,
+            isDetails: false
         }
+    },
+    created() {
+        eventBus.$on('detailsToggle', () => this.isDetails = !this.isDetails);
     },
     computed: {
         unreadCount() {
@@ -53,6 +53,10 @@ export default {
         selected() {
             console.log('this.sortBy', this.sortBy);
             this.$emit('sortBy', this.sortBy);
+        },
+        goHome() {
+            if (!this.$route.path.includes('inbox')) this.$router.push({ path: 'inbox' });
+            this.$emit('setCriteria', { status: 'inbox', starred: false });
         }
     }
 }

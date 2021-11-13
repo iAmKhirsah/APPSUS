@@ -4,14 +4,15 @@ import topBar from "./cmps/top-bar.cmp.js";
 import sideBar from "./cmps/side-bar.cmp.js";
 import emailCompose from "./cmps/email-compose.cmp.js";
 import { eventBus } from "../../../services/event-but-service.js";
-
 export default {
     name: 'email-app',
     template: `
         <section v-if="emails" class="email-app">
-            <top-bar :emails="emailsToShow" @filtered="setFilter" @sortBy="sortBy" @compose="isCompose = !isCompose"/>
+            <top-bar :emails="emailsToShow" @setCriteria="setCriteria" @filtered="setFilter" @sortBy="sortBy" @compose="isCompose = !isCompose"/>
             <side-bar @setCriteria="setCriteria" @compose="isCompose = !isCompose"/>
-            <email-list :emails="emailsToShow"/>
+            <email-list v-if="!this.$route.params.emailId" :emails="emailsToShow"/>
+            <router-view v-else class="email-list"></router-view>
+            <div v-if="isCompose" class="compose-background" @click="isCompose = !isCompose"></div>
             <email-compose v-if="isCompose" @compose="isCompose = !isCompose"/>
         </section>
         <section v-else>Loading</section>
@@ -26,8 +27,10 @@ export default {
     },
     created() {
         eventBus.$on('starChange', () => {
-            if (this.criteria.starred) emailService.query(this.criteria).then(emails => this.emails = emails);;
+            if (this.criteria.starred) emailService.query(this.criteria).then(emails => this.emails = emails);
         });
+        eventBus.$on('emailRemoves', () => emailService.query(this.criteria)
+            .then(emails => this.emails = emails))
         emailService.query(this.criteria)
             .then(emails => this.emails = emails);
 
@@ -39,11 +42,13 @@ export default {
         setCriteria(criteria) {
             this.criteria = criteria;
             emailService.query(this.criteria)
-                .then(emails => this.emails = emails);
+                .then(emails => {
+                    this.emails = emails;
+                });
         },
         sortBy(sortBy) {
             this.emails = emailService.sortBy(this.emails, sortBy);
-        },
+        }
     },
     computed: {
         emailsToShow() {

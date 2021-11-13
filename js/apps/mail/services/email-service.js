@@ -46,7 +46,7 @@ function saveNew(email) {
 }
 
 function remove(emailId) {
-    asyncStorageService.remove(EMAILS_KEY, emailId);
+    return asyncStorageService.remove(EMAILS_KEY, emailId);
 }
 
 function sortBy(emails, sortBy) {

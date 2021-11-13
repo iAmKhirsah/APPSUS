@@ -10,12 +10,6 @@ export default {
         </ul>
         
     `,
-    created() {
-        console.log('true', true);
-    },
-    data() {
-        return {}
-    },
     created() {},
     components: {
         emailPreview

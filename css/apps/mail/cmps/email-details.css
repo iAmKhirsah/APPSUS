@@ -6,7 +6,7 @@
 }
 
 .email-details * {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial;
 }
 
 .email-details>*:not(:last-child) {
@@ -16,14 +16,39 @@
 .detail-buttons * {
     text-decoration: none;
     border: 0;
-    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
-    color: darkgray;
+    font-weight: bold;
+    box-shadow: 0 1px 2px 0 #ea4335, 0 1px 3px 1px #ea4335;
+    color: #ea4335;
     background-color: white;
     margin: 10px;
+    margin-inline-end: 30px;
     cursor: pointer;
+    font-size: 1rem;
     padding: 5px 10px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.detail-buttons *:first-child {
+    box-shadow: 0 1px 2px 0 #4285f4, 0 1px 3px 1px #4285f4;
+    color: #4285f4
+}
+
+.detail-buttons *:last-child {
+    box-shadow: 0 1px 2px 0 #34a852, 0 1px 3px 1px #34a852;
+    color: #34a852
 }
 
 .detail-buttons *:hover {
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.37);
+    background-color: #ea44357a;
+    color: white;
+}
+
+.detail-buttons *:first-child:hover {
+    background-color: #4286f483;
+    color: white;
+}
+
+.detail-buttons *:last-child:hover {
+    background-color: #34a85391;
+    color: white;
 }

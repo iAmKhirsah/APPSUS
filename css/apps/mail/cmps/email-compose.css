@@ -11,6 +11,11 @@
     margin: auto;
     display: flex;
     flex-direction: column;
+    box-shadow: 2px 5px 16px 0px #010203, -3px 0px 3px 10px rgba(0, 0, 0, 0);
+}
+
+.compose-email * {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .compose-email h1 {
@@ -21,7 +26,6 @@
 .compose-email button {
     border: 0;
     background-color: white;
-    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
     cursor: pointer;
     padding: 10px 20px;
 }
@@ -42,6 +46,8 @@
 
 .compose-email form button {
     align-self: center;
+    box-shadow: 0 1px 2px 0 #ea4335, 0 1px 3px 1px #ea4335;
+    color: #ea4335;
 }
 
 .compose-email-buttons {
@@ -50,11 +56,34 @@
     margin: 40px;
 }
 
-
-/* .compose-email form {
-    max-width: 30%;
-    border: 1px solid black;
+.compose-email-buttons {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-} */
+    justify-content: space-between;
+    margin: 40px;
+}
+
+.compose-email-buttons *:first-child {
+    box-shadow: 0 1px 2px 0 #4285f4, 0 1px 3px 1px #4285f4;
+    color: #4285f4
+}
+
+.compose-email-buttons *:last-child {
+    box-shadow: 0 1px 2px 0 #34a852, 0 1px 3px 1px #34a852;
+    color: #34a852
+}
+
+.compose-email h5 {
+    color: rgb(255, 0, 0);
+    position: absolute;
+    bottom: 4em;
+    margin-inline-start: 0.2em;
+}
+
+.compose-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.1;
+    cursor: pointer;
+}
