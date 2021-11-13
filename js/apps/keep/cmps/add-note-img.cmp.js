@@ -2,16 +2,17 @@ export default {
   props: ['noteToEdit', 'processedImg', 'toSave'],
   template: `
          <form @submit.prevent="sendNote"> 
-          <img v-if="note.info.url" :src="note.info.url"/>
+          <img v-if="note.info.url" :src="note.info.url" @mouseover="hover = true" @mouseleave="hover = false"/>
           <input v-model="note.info.title" type="text" placeholder="Title">
           <textarea v-model="note.info.txt" placeholder="Take img..." rows="4" cols="50"></textarea>
+          <button @click.prevent="clearImg" class="clear-img-btn" v-show="hover"></button>
           <!-- <label for="img-input" class="img-input-label"></label>
             <input id="img-input" @change="uploadImage" type="file" accept="image/*" />
-          <button @click.prevent="clearImg">Clear</button> -->
           <!-- <button v-show="!noteToEdit">Save</button> -->
          </form>`,
   data() {
     return {
+      hover: false,
       note: {
         id: null,
         type: 'note-img',
@@ -33,6 +34,9 @@ export default {
     }
   },
   methods: {
+    log(){
+      console.log('hello');
+    },
     clearImg() {
       this.note.info.url = null;
     },

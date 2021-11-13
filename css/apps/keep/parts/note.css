@@ -2,7 +2,7 @@
 .note {
   flex-direction: column;
   align-items: center;
-  width: 200px;
+  width: 260px;
   min-height: 50px;
   border: 1px solid #cec9c9;
   border-radius: 5px;
@@ -79,7 +79,7 @@
   content: '\f24d';
 }
 
-/* .color-container {
+.color-container {
   width: 15px;
   height: 15px;
   background-color: transparent;
@@ -107,7 +107,7 @@
 }
 .color-container i::before {
   font-size: 16px;
-} */
+}
 
 /* HELPERS */
 .clicked {

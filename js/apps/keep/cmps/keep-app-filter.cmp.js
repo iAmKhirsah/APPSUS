@@ -1,6 +1,6 @@
 export default {
   template: `
-    <section :class="['filter-container',activeSearch]">
+    <section :class="['filter-container',activeSearch]" tabindex="0" @focusout="clicked = false">
             <span class="magnifying-glass"></span>
             <input v-model="filterBy.title" @mousedown="showFeatures" @input="filter" type="search" placeholder="Search..." :class="['filter-search', activeSearch]">
             <select v-model="filterBy.type" v-if="clicked"  @change="filter">
@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     activeSearch() {
-      return {'active-search' :  this.clicked}
+      return { 'active-search': this.clicked };
     },
   },
 };

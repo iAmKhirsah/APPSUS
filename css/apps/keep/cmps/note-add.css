@@ -124,15 +124,21 @@ textarea {
   width: 15px;
   margin: 8px;
 }
-/* .controls-container .color-container i {
-  height: 23.75px;
+.controls-container .color-container{
   width: 24px;
+  height: 24px;
+  background-color: transparent;
+  position: relative;
+}
+.controls-container .color-container i {
+  font-size: 1.5rem;
+
 }
 .controls-container .color-container input {
   height: 23.75px;
   width: 24px;
   color: black;
-} */
+}
 
 /* NOTE-IMG-ADD */
 #img-input {
@@ -146,6 +152,27 @@ textarea {
   text-align: center;
   width: 100%;
   height: 300px;
+  border-radius: 5px;
+}
+.clear-img-btn {
+  border: none;
+  background-color: rgb(27, 26, 26);
+  color: white;
+  padding: 10px;
+  position: absolute;
+  right: 33%;
+  top: 28%;
+  border-radius: 5px;
+}
+.clear-img-btn::before{
+  font-family: fa;
+  content: '\f1f8'
+}
+/* NOTE-VID-ADD */
+.video-form iframe{
+  width: 100%;
+  height: 300px;
+  border-radius: 5px;
 }
 /* .main-note-form input[type=file]{
   appearance: none;

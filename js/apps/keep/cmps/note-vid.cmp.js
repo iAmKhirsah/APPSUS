@@ -3,19 +3,19 @@ export default {
   template: `<div>
     <div @click="update(note.id)">
             <h1>{{note.info.title}}</h1>
-            <iframe width="200" height="200"
+            <iframe
             :src="note.info.url">
           </iframe>
           <p>{{note.info.txt}}</p>
 </div>
 <div :class="['in-note-control', isHover]">
 <button @click="setPinned" class="pin-note" :class="checkClicked"></button>
-<label for="note-color-input" class="note-color-icon"></label>
-      <input id="note-color-input" class="hide" type="color" v-model="color" @input="changeBackgroundColor"/>
-<!-- <div class="color-container">
+<!-- <label for="note-color-input" class="note-color-icon"></label>
+      <input id="note-color-input" class="hide" type="color" v-model="color" @input="changeBackgroundColor"/> -->
+<div class="color-container">
 <input type="color" v-model="color" @input="changeBackgroundColor"/>
 <i class="fas fa-palette" :style="'background-color: ' + note.style.backgroundColor"></i>
-</div> -->
+</div>
   <button class="mail-send-icon" @click="sendToMail"></button>
   <button @click="duplicateNote" class="duplicate"></button>
   <button @click="remove(note.id)" class="remove-note"></button>

@@ -8,12 +8,12 @@ export default {
 </div>
 <div :class="['in-note-control', isHover]">
 <button @click="setPinned" class="pin-note" :class="checkClicked"></button>
-<label for="note-color-input" class="note-color-icon"></label>
-      <input id="note-color-input" class="hide" type="color" v-model="color" @input="changeBackgroundColor"/>
-<!-- <div class="color-container">
+<!-- <label for="note-color-input" class="note-color-icon"></label>
+      <input id="note-color-input" class="hide" type="color" v-model="color" @input="changeBackgroundColor"/> -->
+<div class="color-container">
 <input type="color" v-model="color" @input="changeBackgroundColor"/>
 <i class="fas fa-palette" :style="'background-color: ' + note.style.backgroundColor"></i>
-</div> -->
+</div>
     <button class="mail-send-icon" @click="sendToMail"></button>
     <button @click="duplicateNote" class="duplicate"></button>
     <button @click="remove(note.id)" class="remove-note"></button>

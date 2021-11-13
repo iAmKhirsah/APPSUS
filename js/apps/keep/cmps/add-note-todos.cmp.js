@@ -8,7 +8,7 @@ export default {
             </ul> -->
             <div v-for="(answer, idx) in answers" class="todo-div">
               <input type="checkbox" :id="answer + idx">
-              <label :for="answer + idx">{{answer.txt}}, {{idx}}</label>
+              <label :for="answer + idx">{{answer.txt}}</label>
             </div>
             <input class="edit-text-todo" v-if="edit" v-for="todo in note.info.todos" v-model="todo.txt" v-on:keyup.enter.prevent="newTodo()"/>
             <!-- <button @click="addTodo">Add todo</button> -->

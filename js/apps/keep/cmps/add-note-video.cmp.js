@@ -1,7 +1,7 @@
 export default {
   props: ['noteToEdit', 'processedUrl', 'toSave'],
   template: `
-         <form @submit.prevent="sendNote"> 
+         <form @submit.prevent="sendNote" class="video-form"> 
          <iframe 
             :src="processedUrl">
           </iframe>
