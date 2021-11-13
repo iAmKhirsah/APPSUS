@@ -30,7 +30,10 @@ export default {
             if (this.criteria.starred) emailService.query(this.criteria).then(emails => this.emails = emails);
         });
         eventBus.$on('emailRemoves', () => emailService.query(this.criteria)
-            .then(emails => this.emails = emails))
+            .then(emails => this.emails = emails));
+
+        eventBus.$on('noteToMail', () => console.log(true));
+
         emailService.query(this.criteria)
             .then(emails => this.emails = emails);
 

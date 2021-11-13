@@ -1,6 +1,8 @@
+import { eventBus } from "../../../../services/event-bus-service.js";
+
 export default {
-  props: ['note', 'hover'],
-  template: `<div>
+    props: ['note', 'hover'],
+    template: `<div>
     <div @click="update(note.id)">
       <h1>{{note.info.title}}</h1>
       <p>{{note.info.txt}}</p>
@@ -17,47 +19,47 @@ export default {
       <button @click="remove(note.id)" class="remove-note"></button>
     </div>
   </div>`,
-  data() {
-    return {
-      toHover: null,
-      color: '#ffffff',
-    };
-  },
-  methods: {
-    sendToMail() {
-      this.$emit('sendMail', this.note);
+    data() {
+        return {
+            toHover: null,
+            color: '#ffffff',
+        };
     },
-    setHover(val) {
-      this.toHover = val;
+    methods: {
+        sendToMail() {
+            this.$emit('sendMail', this.note);
+        },
+        setHover(val) {
+            this.toHover = val;
+        },
+        duplicateNote() {
+            this.$emit('duplicate', this.note);
+        },
+        setPinned() {
+            this.note.isPinned = !this.note.isPinned;
+            this.$emit('pinned', this.note);
+        },
+        remove(noteId) {
+            this.$emit('remove', noteId);
+        },
+        update(noteId) {
+            this.$emit('update', noteId);
+        },
+        changeBackgroundColor() {
+            this.$emit('newBgc', this.color, this.note.id);
+        },
     },
-    duplicateNote() {
-      this.$emit('duplicate', this.note);
+    computed: {
+        checkClicked() {
+            return this.note.isPinned ? 'clicked' : '';
+        },
+        isHover() {
+            return this.toHover ? '' : 'opacity-hide';
+        },
     },
-    setPinned() {
-      this.note.isPinned = !this.note.isPinned;
-      this.$emit('pinned', this.note);
+    watch: {
+        hover: function(newVal) {
+            this.setHover(newVal);
+        },
     },
-    remove(noteId) {
-      this.$emit('remove', noteId);
-    },
-    update(noteId) {
-      this.$emit('update', noteId);
-    },
-    changeBackgroundColor() {
-      this.$emit('newBgc', this.color, this.note.id);
-    },
-  },
-  computed: {
-    checkClicked() {
-      return this.note.isPinned ? 'clicked' : '';
-    },
-    isHover() {
-      return this.toHover ? '' : 'opacity-hide';
-    },
-  },
-  watch: {
-    hover: function (newVal) {
-      this.setHover(newVal);
-    },
-  },
 };
