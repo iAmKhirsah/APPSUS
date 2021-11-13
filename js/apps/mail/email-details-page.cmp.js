@@ -11,7 +11,7 @@ export default {
         <div class='detail-buttons'>
             <router-link to="/mail/" @click.native="deleteEmail">Delete</router-link>
             <router-link to="/mail/" @click.native="toggleTopBar">Back</router-link>
-            <button @click="saveNote">Save as note</button>
+            <router-link to="/keep/" @click.native="saveNote">Save as note</button></router-link>
         </div>
     </section>
     `,

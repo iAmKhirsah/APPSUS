@@ -50,6 +50,10 @@
     color: #ea4335;
 }
 
+.compose-email textarea {
+    resize: none;
+}
+
 .compose-email-buttons {
     display: flex;
     justify-content: space-between;
