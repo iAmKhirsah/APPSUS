@@ -34,19 +34,16 @@ export default {
             if (this.incomingNote.info.title) this.email.subject = this.incomingNote.info.title;
             if (this.incomingNote.info.txt) this.email.body = this.incomingNote.info.txt;
         }
-
     },
 
     methods: {
-        setBody(body) {
-            this.email.body = body;
-        },
         save(status) {
             if (!this.email.subject && !this.email.to && !this.email.body) {
                 this.isSaveDraft = true;
                 setTimeout(() => {
                     this.isSaveDraft = false;
                 }, 2000);
+                // this.$emit('resetIncomingNote');
                 return;
             }
             emailService.saveNew(emailService.createEmail(this.email.subject,
@@ -59,11 +56,5 @@ export default {
         close() {
             this.$emit('compose');
         }
-    },
-    watch: {
-        incomingNote: function(val) {
-            console.log(newVal)
-
-        }
-    },
+    }
 }

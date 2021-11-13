@@ -10,10 +10,10 @@ export default {
         <section v-if="emails" class="email-app">
             <top-bar :burgerMenu="burgerMenu" :emails="emailsToShow" @setCriteria="setCriteria" @filtered="setFilter" @sortBy="sortBy" @compose="isCompose = !isCompose"/>
             <side-bar :burgerMenu="burgerMenu" @setCriteria="setCriteria" @compose="isCompose = !isCompose"/>
-            <email-list v-if="!this.$route.params.emailId" :emails="emailsToShow"/>
+            <email-list v-if="!this.$route.params.emailId || isBarOpen" :emails="emailsToShow"/>
             <router-view v-else class="email-list"></router-view>
             <div v-if="isCompose" class="black-background" @click="closeModals"></div>
-            <email-compose v-if="isCompose" :incomingNote="incomingNote" @compose="isCompose = !isCompose"/>
+            <email-compose v-if="isCompose" :incomingNote="incomingNote" @compose="toggleCompose"/>
         </section>
         <section v-else>Loading</section>
     `,
@@ -25,6 +25,7 @@ export default {
             isCompose: false,
             incomingNote: null,
             burgerMenu: false,
+            isBarOpen: false
         }
     },
     created() {
@@ -34,12 +35,9 @@ export default {
         eventBus.$on('emailRemoves', () => emailService.query(this.criteria)
             .then(emails => this.emails = emails));
 
+        eventBus.$on('toggleBar', () => this.isBarOpen = !this.isBarOpen)
         emailService.query(this.criteria)
             .then(emails => this.emails = emails);
-
-        eventBus.$on('noteToMail', (note) => {
-            this.incomingNote = note;
-        });
         window.addEventListener('resize', this.windowSizeHandler);
 
     },
@@ -58,18 +56,6 @@ export default {
             immediate: true
         }
     },
-
-    // watch: {
-    //     '$route.path': {
-    //         handler() {
-    //             const pathSplitted = this.$route.path.split('/');
-    //             if (pathSplitted[pathSplitted.length - 1] === 'noteToMail') {
-    //                 this.isCompose = true;
-    //             }
-    //         },
-    //         immediate: true
-    //     }
-    // },
     methods: {
         setFilter(filterBy) {
             this.filterBy = filterBy;
@@ -92,6 +78,10 @@ export default {
         closeModals() {
             if (this.isCompose) this.isCompose = false;
         },
+        toggleCompose() {
+            this.isCompose = !this.isCompose;
+            this.incomingNote = null;
+        }
     },
     computed: {
         emailsToShow() {

@@ -44,3 +44,14 @@ a {
         gap: 40px
     }
 }
+
+@media (max-width: 860px) {
+    .email-preview {
+        max-width: 860px;
+        display: flex;
+    }
+    .column {
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -10,7 +10,6 @@ export default {
         </ul>
         
     `,
-    created() {},
     components: {
         emailPreview
     }

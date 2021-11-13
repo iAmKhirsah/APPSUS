@@ -57,3 +57,18 @@
     background-color: #34a85391;
     color: white;
 }
+
+@media (max-width:860px) {
+    .email-details {
+        font-size: large;
+    }
+    .email-details * {
+        margin: 5px;
+    }
+    .email-details p {
+        margin-inline-start: 20px;
+    }
+    .detail-buttons {
+        margin-block-start: 50px;
+    }
+}
