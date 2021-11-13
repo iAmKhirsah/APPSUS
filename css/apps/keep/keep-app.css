@@ -25,6 +25,7 @@
   grid-auto-flow: dense;
   justify-items: center;
   margin-top: 20px;
+  padding: 30px;
 }
 /* .note-container {
   display: grid;
