@@ -13,7 +13,7 @@ export default {
             <email-list v-if="!this.$route.params.emailId || isBarOpen" :emails="emailsToShow"/>
             <router-view v-else class="email-list"></router-view>
             <div v-if="isCompose" class="black-background" @click="closeModals"></div>
-            <email-compose v-if="isCompose" :incomingNote="incomingNote" @compose="toggleCompose"/>
+            <email-compose v-if="isCompose" :incomingNote="incomingNote" @emailSaved="setCriteria(criteria)" @compose="toggleCompose"/>
         </section>
         <section v-else>Loading</section>
     `,
@@ -81,7 +81,7 @@ export default {
         toggleCompose() {
             this.isCompose = !this.isCompose;
             this.incomingNote = null;
-        }
+        },
     },
     computed: {
         emailsToShow() {

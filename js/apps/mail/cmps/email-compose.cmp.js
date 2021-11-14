@@ -52,6 +52,7 @@ export default {
                 this.email.to, { status, starred: false }
             ));
             this.$emit('compose');
+            this.$emit('emailSaved');
         },
         close() {
             this.$emit('compose');
