@@ -1,6 +1,7 @@
 .main-header {
   background-color: lightblue;
   width: 100%;
+  padding: 15px 0;
   text-align: center;
   display: flex;
   justify-content: space-between;

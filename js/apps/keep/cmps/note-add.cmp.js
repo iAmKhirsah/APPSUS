@@ -25,18 +25,11 @@ export default {
                   <label for="img-input" class="img-icon" @click="setNoteType('note-img'); expandImgSearch()"></label>
                   <input id="img-input" @change="uploadImage" type="file" accept="image/*" />
                   </div>
-                <!-- <div class="controls-container" v-show="controls">
-                  <div class="color-container">
-                  <input type="color" v-model="note.style.backgroundColor"/>
-                  <i class="fas fa-palette star" :style="'background-color: ' + note.style.backgroundColor"></i>
-                </div> -->
                 <div class="controls-container" v-show="controls">
                   <div class="main-color-container">
                   <input type="color" v-model="note.style.backgroundColor"/>
                   <i class="fas fa-palette star" :style="'background-color: ' + note.style.backgroundColor"></i>
                 </div>
-                  <!-- <label for="color-input" class="color-icon"></label>
-                  <input id="color-input" class="hide" type="color" v-model="note.style.backgroundColor"/> -->
                   <button @click="setNoteType('note-txt')" class="txt-icon"></button>
                   <button @click="setNoteType('note-todos')" class="todo-icon"></button>
                     <label for="img-input" class="img-icon" @click="setNoteType('note-img')"></label>
@@ -80,6 +73,13 @@ export default {
       reader.onload = (e) => {
         this.processedImg = e.target.result;
       };
+      this.$nextTick(() => {
+        const msg = {
+          txt: 'Image Uploaded',
+          type: 'Success',
+        };
+        eventBus.$emit('showMsg', msg);
+      });
     },
     ////////////////////////////////
     saveToNote() {
@@ -130,11 +130,26 @@ export default {
       }
       if (!note.info.title) note.info.title = '';
       note.style.backgroundColor = this.note.style.backgroundColor;
-      noteService.toPost('notes', note).then(() => {
-        this.$emit('AddedNote');
-        this.note.type = null;
-        this.controls = false;
-      });
+      noteService
+        .toPost('notes', note)
+        .then(() => {
+          this.$emit('AddedNote');
+          this.note.type = null;
+          this.controls = false;
+          const msg = {
+            txt: 'Note Added',
+            type: 'Success',
+          };
+          eventBus.$emit('showMsg', msg);
+        })
+        .catch((err) => {
+          console.log(err);
+          const msg = {
+            txt: 'Error, Please concact our intern',
+            type: 'Failure',
+          };
+          eventBus.$emit('showMsg', msg);
+        });
     },
   },
   computed: {
