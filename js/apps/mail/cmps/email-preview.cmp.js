@@ -4,7 +4,7 @@ export default {
     name: 'email-preview',
     props: ['email'],
     template: `
-        <section :class="{bold : !email.isRead}" class="email-preview">
+        <section v-if="!mobileMode" :class="{bold : !email.isRead}" class="email-preview">
                 <span :class="{starred : email.criteria.starred}" class="star" @click.prevent="star" v-html="starToShow"></span>
                 <span class="preview-to">{{toPreview}}</span>
                 <span class="preview-subject">{{subjectPreview}}</span>
@@ -12,13 +12,25 @@ export default {
                 <span @click.prevent="markRead" v-html="markAsReadShow" class="preview-read"></span>
                 <span class="preview-date">{{dateTime}}</span>
         </section>
+        <section v-else :class="{bold : !email.isRead}" class="email-preview">
+            <span :class="{starred : email.criteria.starred}" class="star" @click.prevent="star" v-html="starToShow"></span>
+            <div class="column">
+                <span class="preview-to">{{toPreview}}</span>
+                <span class="preview-subject">{{subjectPreview}}</span>
+                <span class="preview-body">{{bodyPreview}}</span>
+            </div>
+                <span @click.prevent="markRead" v-html="markAsReadShow" class="preview-read"></span>
+                <span class="preview-date">{{dateTime}}</span>
+        </section>
     `,
     data() {
-        return {}
+        return {
+            mobileMode: false
+        }
     },
-    // created() {
-    //     window.addEventListener('resize', this.windowSizeHandler);
-    // },
+    created() {
+        window.addEventListener('resize', this.windowSizeHandler);
+    },
     methods: {
         markRead() {
             this.email.isRead = !this.email.isRead;
@@ -31,11 +43,11 @@ export default {
                     if (!this.email.criteria.starred) eventBus.$emit('starChange');
                 });
         },
-        // windowSizeHandler(e) {
-        //     if (window.innerWidth < 1250) {
-
-        //     }
-        // }
+        windowSizeHandler(e) {
+            if (window.innerWidth < 860) {
+                this.mobileMode = true;
+            } else this.mobileMode = false;
+        }
     },
     computed: {
         toPreview() {

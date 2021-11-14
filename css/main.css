@@ -4,6 +4,7 @@
 @import '../css/apps/keep/keep-app.css';
 @import './apps/mail/mail-app.css';
 @import './cmps/app-home.css';
+@import './apps/book/book-app.css';
 @font-face {
   font-family: fa;
   src: url('../fonts/font-awesome.otf');
