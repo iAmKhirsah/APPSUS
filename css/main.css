@@ -16,7 +16,7 @@
   box-sizing: border-box;
 }
 
-.user-msg {
+/* .user-msg {
   position: absolute;
   display: flex;
   align-items: center;
@@ -39,7 +39,7 @@
 .Failure {
   background-color: #323232;
   color: red;
-}
+} */
 /* HELPERS */
 
 .flex-height-fit {
