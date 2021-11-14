@@ -21,21 +21,21 @@ export default {
                   <add-note-video :processedUrl="processedUrl" @urlProcess="urlProcess" @noteVid="saveNote" v-show="note.type === 'note-vid'" :toSave="toSave"/>
                   <div class="dummy-input-container" v-show="!note.type">
                   <input type="text" placeholder="Take note..." @click="expandSearch" class="dummy-input"/>
-                  <div class="todo-icon"  @click="setNoteType('note-todos'); expandTodoSearch()"></div>
-                  <label for="img-input" class="img-icon" @click="setNoteType('note-img'); expandImgSearch()"></label>
+                  <div class="todo-icon"  @click="setNoteType('note-todos'); expandTodoSearch()" title="Add Todo"></div>
+                  <label for="img-input" class="img-icon" @click="setNoteType('note-img'); expandImgSearch()" title="Add Image"></label>
                   <input id="img-input" @change="uploadImage" type="file" accept="image/*" />
                   </div>
-                <div class="controls-container" v-show="controls">
+                <div class="controls-container" v-show="controls" title="Add Color">
                   <div class="main-color-container">
                   <input type="color" v-model="note.style.backgroundColor"/>
                   <i class="fas fa-palette star" :style="'background-color: ' + note.style.backgroundColor"></i>
                 </div>
-                  <button @click="setNoteType('note-txt')" class="txt-icon"></button>
-                  <button @click="setNoteType('note-todos')" class="todo-icon"></button>
-                    <label for="img-input" class="img-icon" @click="setNoteType('note-img')"></label>
+                  <button @click="setNoteType('note-txt')" class="txt-icon" title="Add Text"></button>
+                  <button @click="setNoteType('note-todos')" class="todo-icon" title="Add Todo"></button>
+                    <label for="img-input" class="img-icon" @click="setNoteType('note-img')" title="Add Image"></label>
                     <input id="img-input" @change="uploadImage" type="file" accept="image/*" />
-                  <button @click="setNoteType('note-vid')" class="vid-icon"></button>
-                  <button @click="saveToNote" class="close-save-btn">Close</button>
+                  <button @click="setNoteType('note-vid')" class="vid-icon" title="Add Video"></button>
+                  <button @click="saveToNote" class="close-save-btn" title="Save">Close</button>
                 </div>
               </form>
             </div>

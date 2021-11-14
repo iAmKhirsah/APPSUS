@@ -4,7 +4,7 @@ export default {
             <span class="magnifying-glass"></span>
             <input v-model="filterBy.title" @mousedown="showFeatures" @input="filter" type="search" placeholder="Search..." :class="['filter-search', activeSearch]">
             <div class="select-container">
-              <select v-model="filterBy.type" @change="filter" class="select">
+              <select v-model="filterBy.type" @change="filter" class="select" title="Sort By Type">
                 <option value="">All</option>
                 <option value="note-txt">Txt</option>
                 <option value="note-todos">Todos</option>
