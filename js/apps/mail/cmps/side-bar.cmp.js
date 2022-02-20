@@ -4,7 +4,7 @@ export default {
     name: 'side-bar',
     props: ['burgerMenu'],
     template: `
-        <section v-if="!burgerMenu || isOpen" class="side-bar">
+        <section v-if="isOpen" class="side-bar">
             <button class="compose-btn" @click="compose">
                 <img src="https://www.gstatic.com/images/icons/material/colored_icons/1x/create_32dp.png"/>
                 Compose
@@ -40,9 +40,9 @@ export default {
             this.isOpen = !this.isOpen;
         },
         compose() {
+            this.isOpen = false
             this.$emit('compose');
-        }
-    },
-    watch: {}
+        },
 
+    },
 }

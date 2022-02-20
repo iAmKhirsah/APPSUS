@@ -60,14 +60,19 @@
     color: rgb(179, 0, 0);
 }
 
+
+
 @media (max-width: 860px) {
     html {
         font-size: 14px;
     }
     .side-bar {
-        max-width: 99%;
+        z-index: 1;
+        max-width: 80%;
         padding-inline-end: 5px;
         background-color: white;
+        border-inline-end: 1px solid #888;
+        padding:5px;
     }
     .side-bar * {
         font-size: 20px;
@@ -78,5 +83,9 @@
     }
     .folder-list {
         width: 100%;
+    }
+
+    .compose-btn {
+        width: 90%;
     }
 }

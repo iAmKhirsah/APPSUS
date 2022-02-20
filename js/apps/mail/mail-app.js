@@ -12,7 +12,6 @@ export default {
             <side-bar :burgerMenu="burgerMenu" @setCriteria="setCriteria" @compose="isCompose = !isCompose"/>
             <email-list v-if="!this.$route.params.emailId || isBarOpen" :emails="emailsToShow"/>
             <router-view v-else class="email-list"></router-view>
-            <div v-if="isCompose" class="black-background" @click="closeModals"></div>
             <email-compose v-if="isCompose" :incomingNote="incomingNote" @emailSaved="setCriteria(criteria)" @compose="toggleCompose"/>
         </section>
         <section v-else>Loading</section>
@@ -35,7 +34,10 @@ export default {
         eventBus.$on('emailRemoves', () => emailService.query(this.criteria)
             .then(emails => this.emails = emails));
 
-        eventBus.$on('toggleBar', () => this.isBarOpen = !this.isBarOpen)
+        eventBus.$on('toggleBar', () => {
+            this.isBarOpen = !this.isBarOpen
+            console.log(this.isBarOpen)
+        })
         emailService.query(this.criteria)
             .then(emails => this.emails = emails);
         window.addEventListener('resize', this.windowSizeHandler);
@@ -76,7 +78,8 @@ export default {
             } else this.burgerMenu = false;
         },
         closeModals() {
-            if (this.isCompose) this.isCompose = false;
+            if (this.isCompose) this.isCompose = false
+            if (this.isBarOpen) this.isBarOpen = false
         },
         toggleCompose() {
             this.isCompose = !this.isCompose;

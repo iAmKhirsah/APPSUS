@@ -4,6 +4,7 @@ export default {
     props: ['emails', 'burgerMenu'],
     template: `
         <section class="top-bar">
+        <!-- <div class="blackBgc" @click="toggleSideBar"></div> -->
             <div v-if="burgerMenu" class="burgerMenu" @click="toggleSideBar"><i class="fas fa-bars"></i></div>
             <div v-if="!burgerMenu" @click="goHome" class="logo">
                 <img src="./img/logo.png"/>
@@ -50,7 +51,7 @@ export default {
     },
     methods: {
         filter() {
-            this.$emit('filtered', {...this.filterBy });
+            this.$emit('filtered', { ...this.filterBy });
         },
         selected() {
             console.log('this.sortBy', this.sortBy);
