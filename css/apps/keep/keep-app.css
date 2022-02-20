@@ -39,30 +39,7 @@
   justify-items: center;
   margin-top: 20px;
 } */
-.user-msg {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  right: 87%;
-  top: 93%;
-  height: 100px;
-  width: 20%;
-  border-radius: 5px;
-  transform: translate(50%, -50%);
-}
-.user-msg p {
-  font-size: 1.2rem;
-  margin-inline-start: 20px;
-}
 
-.Success {
-  background-color: #323232;
-  color: white;
-}
-.Failure {
-  background-color: #323232;
-  color: red;
-}
 /* general */
 ul li {
   list-style: none;
@@ -74,4 +51,28 @@ ul li {
 
 .line-through {
   text-decoration: line-through;
+}
+.user-msg-keep {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 87%;
+  top: 93%;
+  height: 100px;
+  width: 20%;
+  border-radius: 5px;
+  transform: translate(50%, -50%);
+}
+.user-msg-keep p {
+  font-size: 1.2rem;
+  margin-inline-start: 20px;
+}
+
+.Success {
+  background-color: #323232;
+  color: white;
+}
+.Failure {
+  background-color: #323232;
+  color: red;
 }
