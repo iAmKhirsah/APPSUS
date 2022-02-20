@@ -1,9 +1,10 @@
 /* home-page */
 
 .home-page {
-    margin: auto;
-    max-width: 50%;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .home-page img {

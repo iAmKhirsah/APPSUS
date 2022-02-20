@@ -75,6 +75,7 @@
         color: rgb(20, 14, 14);
         margin-inline-start: 20px;
         margin-inline-end: 20px;
+        cursor: pointer;
     }
     .search-input {
         width: 100%;

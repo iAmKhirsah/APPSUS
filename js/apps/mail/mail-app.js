@@ -13,6 +13,7 @@ export default {
             <email-list v-if="!this.$route.params.emailId || isBarOpen" :emails="emailsToShow"/>
             <router-view v-else class="email-list"></router-view>
             <email-compose v-if="isCompose" :incomingNote="incomingNote" @emailSaved="setCriteria(criteria)" @compose="toggleCompose"/>
+            <div v-if="isCompose" class="black-background" @click="toggleCompose"></div>
         </section>
         <section v-else>Loading</section>
     `,
@@ -28,6 +29,7 @@ export default {
         }
     },
     created() {
+        this.windowSizeHandler()
         eventBus.$on('starChange', () => {
             if (this.criteria.starred) emailService.query(this.criteria).then(emails => this.emails = emails);
         });
@@ -72,10 +74,12 @@ export default {
         sortBy(sortBy) {
             this.emails = emailService.sortBy(this.emails, sortBy);
         },
-        windowSizeHandler(e) {
+        windowSizeHandler() {
             if (window.innerWidth < 860) {
                 this.burgerMenu = true;
-            } else this.burgerMenu = false;
+            } else {
+                this.burgerMenu = false;
+            }
         },
         closeModals() {
             if (this.isCompose) this.isCompose = false
